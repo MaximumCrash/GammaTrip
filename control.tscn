@@ -1,22 +1,3 @@
-[gd_scene format=3 uid="uid://uemm8a6mljhp"]
-
-[node name="Game" type="Node"]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemList" type="ItemList" parent="Control"]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 10.0
-offset_right = 447.0
-offset_bottom = 104.0
-item_count = 3
-item_0/text = "1. Do Thing"
-item_1/text = "2. Do Other Thing"
-item_2/text = "3. Do Other Other Thing"
+version https://git-lfs.github.com/spec/v1
+oid sha256:b2bcf440fd19e5bc3ef505d21c63c4c440d403256d27909f4d70209c579f754e
+size 509
