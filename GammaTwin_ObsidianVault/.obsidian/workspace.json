@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Getting Started/What Are We Making.md",
+                "file": "Getting Started/Start Here.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "What Are We Making"
+              "title": "Start Here"
             }
           }
         ]
@@ -187,10 +187,10 @@
   },
   "active": "3f59bb61ccb22890",
   "lastOpenFiles": [
-    "Galaga_Legions_DX_Championship_Redux.gif",
-    "Getting Started/What Are We Making.md",
-    "Getting Started/Start Here.md",
     "Getting Started/Tools to get familiar with.md",
+    "Getting Started/What Are We Making.md",
+    "Galaga_Legions_DX_Championship_Redux.gif",
+    "Getting Started/Start Here.md",
     "Getting Started/Untitled.canvas",
     "Getting Started"
   ]
