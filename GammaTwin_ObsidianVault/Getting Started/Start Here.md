@@ -3,6 +3,7 @@ Here are some great places to start:
 
 1. [[Tools to get familiar with]]
 2. [[What Are We Making]]
+3. [[Code Principles]]
 
 ### The Team
 Primary Contact/Lead Developer: Rejon Taylor-Foster (rejon@maximumcrash.com)
