@@ -1,0 +1,5 @@
+- **Game Engine:** Godot Engine v4.4.1.stable.official [49a5bc7b6]
+- **Brainstorm Board**: [Kinopio](https://kinopio.club/invite?spaceId=Rcbvmco50pHPSgzQnZVMD&readOnlyKey=TmZYu5xTsJX_-m11AW8-g&name=gamma-trip---project-space) Read only, ask **Rejon** for edit access
+- **Wiki/Docs:** [Obsidian](https://obsidian.md/)The application you're reading this in
+- **Chat/Communication**: Slack (Ask **Rejon** for an invite)
+- **Project Repository:** [Github](https://github.com/MaximumCrash/GammaTrip)
