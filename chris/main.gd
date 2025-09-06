@@ -14,11 +14,16 @@ func _on_hud_start_game() -> void:
 
 func new_game():
 	score = 0
-	$Player.show()
-	$Player.start(player_speed, $StartPos.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Get Ready")
+	var wait = 0.75
+	$HUD.show_message("Gamma", wait)
+	await get_tree().create_timer(wait).timeout
+	$HUD.show_message("Trip", wait)
+	await get_tree().create_timer(wait).timeout
+
+	$Player.show()
+	$Player.start(player_speed, $StartPos.position)
 
 
 func _on_score_timer_timeout() -> void:
