@@ -35,7 +35,7 @@ func _on_mob_timer_timeout() -> void:
 	dir += randf_range(-PI / 4, PI / 4)
 	mob.rotation = dir
 
-	var vel = Vector2(randf_range(150.0, 250.0), 0.0)
+	var vel = Vector2(randf_range(25.0, 75.0), 0.0)
 	mob.linear_velocity = vel.rotated(dir)
 
 	add_child(mob)

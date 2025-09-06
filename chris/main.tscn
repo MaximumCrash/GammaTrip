@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://cb3tyecuy2mog"]
 
-[ext_resource type="Script" path="res://chris/main.gd" id="1_rd8nt"]
+[ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/main.gd" id="1_rd8nt"]
 [ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_8f6ys"]
 [ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="3_8f6ys"]
 [ext_resource type="PackedScene" uid="uid://drf8njxyveqp2" path="res://chris/hud.tscn" id="4_awu87"]
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1912, 0, 0, 0, 0, 0, 1912, 1088, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0)
 }
-point_count = 5
+point_count = 3
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rd8nt")
@@ -31,6 +31,7 @@ position = Vector2(960, 540)
 curve = SubResource("Curve2D_5i7a3")
 
 [node name="MobSpawn" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-0.0869751, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_8f6ys")]
 
