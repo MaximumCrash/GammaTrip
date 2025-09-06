@@ -1,14 +1,21 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var player_speed = 500
+@export var min_enemy_speed = 200
+@export var max_enemy_speed = 400
 var score
+
+func _ready():
+	$Player.hide()
 
 func _on_hud_start_game() -> void:
 	new_game()
 
 func new_game():
 	score = 0
-	$Player.start($StartPos.position)
+	$Player.show()
+	$Player.start(player_speed, $StartPos.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
@@ -32,10 +39,10 @@ func _on_mob_timer_timeout() -> void:
 
 	var dir = mob_spawn_location.rotation + PI / 2
 
-	dir += randf_range(-PI / 4, PI / 4)
+	dir += randf_range(PI/2, -PI/2)
 	mob.rotation = dir
 
-	var vel = Vector2(randf_range(25.0, 75.0), 0.0)
+	var vel = Vector2(randf_range(min_enemy_speed, max_enemy_speed), 0.0)
 	mob.linear_velocity = vel.rotated(dir)
 
 	add_child(mob)

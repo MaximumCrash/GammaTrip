@@ -3,16 +3,23 @@ signal hit
 @export var speed = 400
 var screen_size
 
+# shoot
+@export var bullet_speed = 400
+@export var fire_rate_ms = 200
+var last_fire_time = 0
+
+@export var bullet_scene: PackedScene
+
 func _ready():
 	screen_size = get_viewport_rect().size
-	hide()
 
-func start(pos):
+func start(player_speed, pos):
+	speed = player_speed
 	position = pos
-	show()
 	$CollisionShape2D.disabled = false
 
 func _process(delta):
+	# move
 	var velocity = Vector2.ZERO
 
 	if Input.is_action_pressed("move_right"):
@@ -43,6 +50,18 @@ func _process(delta):
 
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
+	# shoot
+	if Input.is_action_pressed("fire"):
+		var time = Time.get_ticks_msec()
+		if time - last_fire_time > fire_rate_ms:
+			last_fire_time = time
+
+			var bullet = bullet_scene.instantiate()
+			var root = get_tree().get_root()
+			root.add_child(bullet)
+			bullet.global_position = $BulletSpawn.global_position
+			bullet.shoot(bullet_speed)
 
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
