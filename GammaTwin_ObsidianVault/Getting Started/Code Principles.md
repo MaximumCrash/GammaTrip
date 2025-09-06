@@ -1,0 +1,4 @@
+This is our first time working in Godot so there's a lot to learn, but we're all professionals here, so here's what we care about:
+1. **Composition > Inheritance:** Cleaner code, easier to understand, breaks less shit
+2. **Linting is God**: When we run into something we don't like, add a linter that makes sure it doesn't happen again. This is great if the team discovers a pattern for how we write code we all agree on without forcing anyone to write code a specific way.
+3. **Be not afraid of static functions and singletons:** These are necessary for keeping things clean but too many that only do one thing for one situation is bad.
