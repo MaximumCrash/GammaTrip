@@ -1,15 +1,16 @@
+class_name HUD
 extends CanvasLayer
 
 signal start_game
 
 
-func show_message(text, duration):
+func show_message(text: String, duration: float) -> void:
 	$MessageTimer.wait_time = duration
 	$Message.text = text
 	$Message.show()
 	$MessageTimer.start()
 
-func show_game_over():
+func show_game_over() -> void:
 	show_message("Game Over", 1.0)
 
 	await $MessageTimer.timeout
@@ -20,7 +21,7 @@ func show_game_over():
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 
-func update_score(score):
+func update_score(score: int) -> void:
 	$ScoreLabel.text = str(score)
 
 
