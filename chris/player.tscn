@@ -39,6 +39,7 @@ height = 140.0
 [node name="Player" type="Area2D"]
 position = Vector2(973, 600)
 script = ExtResource("1_wt2hm")
+bullet_speed = 800.0
 fire_rate_ms = 100.0
 bullet_lifetime = 0.75
 bullet_scene = ExtResource("2_aamy7")

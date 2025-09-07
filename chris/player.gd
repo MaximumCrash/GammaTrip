@@ -33,7 +33,6 @@ func _ready() -> void:
 		root.add_child(bullet)
 		bullet.set_state(false)
 		bullets.push_back(bullet)
-		print("yep ", i)
 
 func start(player_speed: float, pos: Vector2) -> void:
 	speed = player_speed

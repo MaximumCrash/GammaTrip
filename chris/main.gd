@@ -25,11 +25,6 @@ func new_game() -> void:
 	$Player.show()
 	$Player.start(player_speed, $StartPos.position)
 
-
-func _on_score_timer_timeout() -> void:
-	score += 1
-	$HUD.update_score(score)
-
 func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
 	$ScoreTimer.start()
@@ -51,8 +46,16 @@ func _on_mob_timer_timeout() -> void:
 	mob.linear_velocity = vel.rotated(dir)
 
 	add_child(mob)
+	mob.explode.connect(_on_mob_explode)
 
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+
+
+func _on_mob_explode(global_pos: Vector2) -> void:
+	score += 1
+	$HUD.update_score(score)
+	$EnemyExplode.global_position = global_pos
+	$EnemyExplode.restart()

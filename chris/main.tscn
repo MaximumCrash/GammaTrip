@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cb3tyecuy2mog"]
+[gd_scene load_steps=7 format=3 uid="uid://cb3tyecuy2mog"]
 
 [ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/main.gd" id="1_rd8nt"]
 [ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_8f6ys"]
 [ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="3_8f6ys"]
 [ext_resource type="PackedScene" uid="uid://drf8njxyveqp2" path="res://chris/hud.tscn" id="4_awu87"]
+[ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_fnt0s"]
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
 _data = {
@@ -16,7 +17,7 @@ script = ExtResource("1_rd8nt")
 mob_scene = ExtResource("2_8f6ys")
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -36,6 +37,8 @@ position = Vector2(-0.0869751, 0)
 [node name="Player" parent="." instance=ExtResource("3_8f6ys")]
 
 [node name="HUD" parent="." instance=ExtResource("4_awu87")]
+
+[node name="EnemyExplode" parent="." instance=ExtResource("5_fnt0s")]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
