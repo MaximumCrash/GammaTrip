@@ -6,7 +6,16 @@ extends Node
 @export var max_enemy_speed: float = 400
 var score: int
 
+var enemies: Array[Enemy]
+var spawn_count: int
+var wave: int
+
+@export var enemies_per_wave := 10
+var wave_kind: int
+
 func _ready() -> void:
+	wave = 1
+	wave_kind = 0
 	$Player.hide()
 
 func _on_hud_start_game() -> void:
@@ -15,7 +24,7 @@ func _on_hud_start_game() -> void:
 func new_game() -> void:
 	score = 0
 	$StartTimer.start()
-	$HUD.update_score(score)
+	$HUD.update_score(score, wave)
 	var wait: float = 0.75
 	$HUD.show_message("Gamma", wait)
 	await get_tree().create_timer(wait).timeout
@@ -32,21 +41,31 @@ func _on_start_timer_timeout() -> void:
 func _on_mob_timer_timeout() -> void:
 	var mob: Enemy = mob_scene.instantiate()
 
-	var mob_spawn_location: Node = $MobPath/MobSpawn
+	var mob_spawn_location:Node = $MobPath/MobSpawn
 	mob_spawn_location.progress_ratio = randf()
-	
-	mob.position = mob_spawn_location.position
+	var spawn_pos:Vector2 = mob_spawn_location.position
 
-	var dir: float = mob_spawn_location.rotation + PI / 2
+	var path: Path2D
+	match wave_kind:
+		0:
+			path = $Paths/Line
+		1:
+			path = $Paths/Curve
+		2:
+			path = $Paths/S_Curve
+			
+	mob.h_offset = path.position.x - spawn_pos.x
 
-	dir += randf_range(PI/2, -PI/2)
-	mob.rotation = dir
+	path.add_child(mob)
+	enemies.push_back(mob)
 
-	var vel: Vector2 = Vector2(randf_range(min_enemy_speed, max_enemy_speed), 0.0)
-	mob.linear_velocity = vel.rotated(dir)
-
-	add_child(mob)
 	mob.explode.connect(_on_mob_explode)
+	spawn_count += 1
+
+
+func _process(delta: float) -> void:
+	for enemy in enemies:
+		enemy.progress += delta * max_enemy_speed
 
 func game_over() -> void:
 	$ScoreTimer.stop()
@@ -54,8 +73,26 @@ func game_over() -> void:
 	$HUD.show_game_over()
 
 
-func _on_mob_explode(global_pos: Vector2) -> void:
-	score += 1
-	$HUD.update_score(score)
+func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
+	var idx := enemies.find(enemy)
+
+	if idx == -1:
+		return
+
+	enemies.remove_at(idx)
 	$EnemyExplode.global_position = global_pos
 	$EnemyExplode.restart()
+
+	score += 1
+
+	# pick random move path
+	if score % enemies_per_wave == 0:
+		wave_kind = randi_range(0, 2)
+		wave += 1
+
+		var wait:float = $MobTimer.wait_time
+		wait -= 0.1
+		wait = max(0.2, wait)
+		$MobTimer.wait_time = wait
+
+	$HUD.update_score(score, wave)

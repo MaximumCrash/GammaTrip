@@ -1,14 +1,24 @@
 class_name Enemy
-extends RigidBody2D
+extends Node2D
 
 signal explode
 
 var killed_by_player := true
 
+@export var path_follow: PathFollow2D
+@export var body: AnimatableBody2D
+@export var anim: AnimatedSprite2D
+
+@export var move_speed := 400.0
+
 func _ready() -> void:
-	var mob_types: Array = Array($AnimatedSprite2D.sprite_frames.get_animation_names())
-	$AnimatedSprite2D.animation = mob_types.pick_random()
-	$AnimatedSprite2D.play()
+	var mob_types: Array = Array(anim.sprite_frames.get_animation_names())
+	anim.animation = mob_types.pick_random()
+	anim.play()
+
+func _physics_proces(delta: float) -> void:
+	path_follow.progress += move_speed * delta
+	body.global_position = path_follow.global_position
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	killed_by_player = false
@@ -16,4 +26,4 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _exit_tree() -> void:
 	if killed_by_player:
-		explode.emit(global_position)
+		explode.emit(self, global_position)

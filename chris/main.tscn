@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb3tyecuy2mog"]
+[gd_scene load_steps=10 format=3 uid="uid://cb3tyecuy2mog"]
 
 [ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/main.gd" id="1_rd8nt"]
 [ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_8f6ys"]
@@ -8,16 +8,33 @@
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1456, 0)
 }
 point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_fnt0s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1080)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_81mca"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -8, 0, 0, -280.229, 0, 280.229, 272, 496, 0, 0, 0, 0, 0, 1072)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_mkd0d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -2, -154, 2, 154, 440, 232, 0, -223.85, 0, 223.85, -256, 696, 0, 0, 0, 0, 0, 1072)
+}
+point_count = 4
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rd8nt")
 mob_scene = ExtResource("2_8f6ys")
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.2
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -26,19 +43,33 @@ wait_time = 2.0
 one_shot = true
 
 [node name="StartPos" type="Marker2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(640, 540)
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_5i7a3")
 
 [node name="MobSpawn" type="PathFollow2D" parent="MobPath"]
-position = Vector2(-0.0869751, 0)
+position = Vector2(-0.261047, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_8f6ys")]
 
 [node name="HUD" parent="." instance=ExtResource("4_awu87")]
 
 [node name="EnemyExplode" parent="." instance=ExtResource("5_fnt0s")]
+
+[node name="Paths" type="Node" parent="."]
+
+[node name="Line" type="Path2D" parent="Paths"]
+position = Vector2(640, 0)
+curve = SubResource("Curve2D_fnt0s")
+
+[node name="Curve" type="Path2D" parent="Paths"]
+position = Vector2(640, 0)
+curve = SubResource("Curve2D_81mca")
+
+[node name="S_Curve" type="Path2D" parent="Paths"]
+position = Vector2(640, 0)
+curve = SubResource("Curve2D_mkd0d")
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

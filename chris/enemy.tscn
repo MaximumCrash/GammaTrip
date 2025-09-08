@@ -48,21 +48,25 @@ animations = [{
 radius = 46.0
 height = 91.9999
 
-[node name="Mob" type="RigidBody2D"]
-position = Vector2(1037, 510)
-collision_mask = 0
-gravity_scale = 0.0
+[node name="Enemy" type="PathFollow2D" node_paths=PackedStringArray("path_follow", "body", "anim")]
+rotates = false
 script = ExtResource("1_nr3u1")
-metadata/_edit_group_ = true
+path_follow = NodePath(".")
+body = NodePath("AnimatableBody2D")
+anim = NodePath("AnimatableBody2D/AnimatedSprite2D")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(5, 0)
+collision_mask = 0
+sync_to_physics = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D"]
 sprite_frames = SubResource("SpriteFrames_dijsk")
 animation = &"fly"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(8, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jjqvt")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="AnimatableBody2D"]
