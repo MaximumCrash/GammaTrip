@@ -13,6 +13,14 @@ var last_fire_time := 0.0
 var bullets: Array[Bullet] 
 var bullet_index: int
 
+enum Kind {MACHINE_GUN, BEAM}
+@export var kind: Kind
+
+@export var charge_time := 0.5
+var charge_timer := 0.0
+
+var is_attack:= false
+
 func init() -> void:
 	bullet_index = 0
 
@@ -22,9 +30,29 @@ func init() -> void:
 		root.add_child(bullet)
 		bullet.set_state(false)
 		bullets.push_back(bullet)
-	
 
-func attack() -> void:
+func _process(delta: float) -> void:
+	match kind:
+		Kind.BEAM:
+			if !is_attack:
+				charge_timer = 0
+				$AnimatedSprite2D.animation = "idle"
+				$AnimatedSprite2D.stop()
+				return
+
+			charge_timer += delta
+			if charge_timer <= charge_time:
+				$AnimatedSprite2D.animation = "charge"
+				$AnimatedSprite2D.play()
+				is_attack = false
+				return
+
+		Kind.MACHINE_GUN:
+			if !is_attack:
+				return
+
+	is_attack = false
+
 	var time := Time.get_ticks_msec()
 	if time - last_fire_time > fire_rate_ms:
 		last_fire_time = time
@@ -38,3 +66,6 @@ func attack() -> void:
 
 		if bullet_index >= num_bullets:
 			bullet_index = 0
+
+func attack() -> void:
+	is_attack = true
