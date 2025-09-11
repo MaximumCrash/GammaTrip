@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://juqw07ibbuhk"]
 
 [ext_resource type="Script" uid="uid://bpxwwad7rv8x4" path="res://chris/player.gd" id="1_wt2hm"]
-[ext_resource type="PackedScene" uid="uid://c4fununbbwhm" path="res://chris/bullet.tscn" id="2_aamy7"]
+[ext_resource type="PackedScene" uid="uid://cddewn5ij6onj" path="res://chris/weapon.tscn" id="2_aamy7"]
 [ext_resource type="Texture2D" uid="uid://ccl21ekq7sv3b" path="res://chris/art/playerGrey_up1.png" id="2_sv2wq"]
 [ext_resource type="Texture2D" uid="uid://bh3uei5400ei3" path="res://chris/art/playerGrey_up2.png" id="3_aamy7"]
 [ext_resource type="Texture2D" uid="uid://gp8s1iibjq0m" path="res://chris/art/playerGrey_walk1.png" id="4_wcbek"]
@@ -36,12 +36,9 @@ animations = [{
 radius = 55.0
 height = 140.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("weapons")]
 script = ExtResource("1_wt2hm")
-bullet_speed = 800.0
-fire_rate_ms = 100.0
-bullet_lifetime = 0.75
-bullet_scene = ExtResource("2_aamy7")
+weapons = [NodePath("weapon - center"), NodePath("weapon - left"), NodePath("weapon - right")]
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -51,7 +48,12 @@ animation = &"up"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_un1w1")
 
-[node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -100)
+[node name="weapon - center" parent="." instance=ExtResource("2_aamy7")]
+
+[node name="weapon - left" parent="." instance=ExtResource("2_aamy7")]
+position = Vector2(-90, 0)
+
+[node name="weapon - right" parent="." instance=ExtResource("2_aamy7")]
+position = Vector2(90, 0)
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

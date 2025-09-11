@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cddewn5ij6onj"]
+
+[ext_resource type="Script" uid="uid://bwy28yvaryfbf" path="res://chris/weapon.gd" id="1_6xtx4"]
+[ext_resource type="PackedScene" uid="uid://c4fununbbwhm" path="res://chris/bullet.tscn" id="2_kqbgb"]
+
+[node name="weapon" type="Node2D"]
+script = ExtResource("1_6xtx4")
+bullet_scene = ExtResource("2_kqbgb")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(0, -100)
