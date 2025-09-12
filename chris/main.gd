@@ -6,6 +6,9 @@ extends Node
 @export var max_enemy_speed: float = 400
 var score: int
 
+@export var min_enemy_hp := 1
+@export var max_enemy_hp := 5
+
 var enemies: Array[Enemy]
 var spawn_count: int
 var wave: int
@@ -40,6 +43,7 @@ func _on_start_timer_timeout() -> void:
 
 func _on_mob_timer_timeout() -> void:
 	var mob: Enemy = mob_scene.instantiate()
+	mob.hp = randi_range(min_enemy_hp, max_enemy_hp)
 
 	var mob_spawn_location:Node = $MobPath/MobSpawn
 	mob_spawn_location.progress_ratio = randf()

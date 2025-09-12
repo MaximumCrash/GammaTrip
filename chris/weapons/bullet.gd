@@ -1,6 +1,8 @@
 class_name Bullet
 extends Area2D
 
+@export var damage := 1
+
 var speed: float
 var lifetime: float
 var is_shooting: bool
@@ -22,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	position -= transform.y * speed * delta
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	body.get_parent().queue_free()
+	body.get_parent().damage(damage)
 	set_state(false)
 
 func set_state(shoot: bool) -> void:
