@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 			if !is_attack:
 				charge_timer = 0
 				$AnimatedSprite2D.animation = "idle"
-				$AnimatedSprite2D.stop()
+				$AnimatedSprite2D.play()
 				return
 
 			charge_timer += delta

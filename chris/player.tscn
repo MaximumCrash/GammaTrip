@@ -50,6 +50,7 @@ animation = &"up"
 shape = SubResource("CapsuleShape2D_un1w1")
 
 [node name="weapon - center" parent="." instance=ExtResource("6_aamy7")]
+position = Vector2(0, -107)
 fire_rate_ms = 0.0
 bullet_lifetime = 0.1
 

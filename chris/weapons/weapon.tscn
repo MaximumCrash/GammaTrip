@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cddewn5ij6onj"]
+[gd_scene load_steps=4 format=3 uid="uid://cddewn5ij6onj"]
 
 [ext_resource type="Script" uid="uid://bwy28yvaryfbf" path="res://chris/weapons/weapon.gd" id="1_6xtx4"]
 [ext_resource type="PackedScene" uid="uid://c4fununbbwhm" path="res://chris/weapons/bullet.tscn" id="2_kqbgb"]
+[ext_resource type="Texture2D" uid="uid://but6nbfegrciw" path="res://chris/art/weapon.png" id="3_jxa1o"]
 
 [node name="weapon" type="Node2D"]
 script = ExtResource("1_6xtx4")
 bullet_scene = ExtResource("2_kqbgb")
+bullet_speed = 800.0
+fire_rate_ms = 100.0
+bullet_lifetime = 1.0
+num_bullets = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_jxa1o")
 
 [node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -100)
+position = Vector2(0, -24)
