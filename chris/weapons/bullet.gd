@@ -7,10 +7,11 @@ var speed: float
 var lifetime: float
 var is_shooting: bool
 
-func shoot(pos: Vector2, bullet_speed: float, bullet_lifetime: float) -> void:
+func shoot(pos: Vector2, dir: float, bullet_speed: float, bullet_lifetime: float) -> void:
 	speed = bullet_speed
 	lifetime = bullet_lifetime
 	set_state(true)
+	rotation = dir
 	global_position = pos
 
 func _physics_process(delta: float) -> void:

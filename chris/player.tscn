@@ -56,8 +56,10 @@ bullet_lifetime = 0.1
 
 [node name="weapon - left" parent="." instance=ExtResource("2_aamy7")]
 position = Vector2(-90, 0)
+rotation = -0.261799
 
 [node name="weapon - right" parent="." instance=ExtResource("2_aamy7")]
 position = Vector2(90, 0)
+rotation = 0.261799
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

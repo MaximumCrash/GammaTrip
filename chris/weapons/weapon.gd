@@ -1,5 +1,5 @@
 class_name Weapon
-extends Node
+extends Node2D
 
 @export var bullet_scene: PackedScene
 
@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 		var bullet := bullets[bullet_index]
 		if !bullet.is_shooting:
 			var spawn_pos:Vector2 = $BulletSpawn.global_position
-			bullet.shoot(spawn_pos, bullet_speed, bullet_lifetime)
+			bullet.shoot(spawn_pos, rotation, bullet_speed, bullet_lifetime)
 
 		bullet_index += 1
 
