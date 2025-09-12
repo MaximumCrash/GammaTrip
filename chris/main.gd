@@ -1,13 +1,16 @@
 extends Node
 
-@export var mob_scene: PackedScene
+@export_group("Player")
 @export var player_speed: float = 500
 @export var min_enemy_speed: float= 200
 @export var max_enemy_speed: float = 400
 var score: int
 
+@export_group("Enemy")
+@export var mob_scene: PackedScene
 @export var min_enemy_hp := 1
 @export var max_enemy_hp := 5
+@export var min_enemy_spawn_rate := 0.1
 
 var enemies: Array[Enemy]
 var spawn_count: int
@@ -96,7 +99,7 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 
 		var wait:float = $MobTimer.wait_time
 		wait -= 0.1
-		wait = max(0.2, wait)
+		wait = max(min_enemy_spawn_rate, wait)
 		$MobTimer.wait_time = wait
 
 	$HUD.update_score(score, wave)
