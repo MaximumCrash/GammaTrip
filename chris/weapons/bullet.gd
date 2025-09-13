@@ -28,8 +28,8 @@ func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, 
 	body.get_parent().damage(damage)
 	set_state(false)
 
-func set_state(shoot: bool) -> void:
-	is_shooting = shoot
+func set_state(do_shoot: bool) -> void:
+	is_shooting = do_shoot
 
 	if is_shooting:
 		show()

@@ -63,12 +63,13 @@ func _process(delta: float) -> void:
 	var time := Time.get_ticks_msec()
 	if time - last_fire_time > fire_rate_ms:
 		last_fire_time = time
+		var spawn_pos: Vector2 = $BulletSpawn.global_position
 
 		match kind:
 			Kind.MACHINE_GUN, Kind.BEAM:
 				var bullet := bullets[bullet_index]
 				if !bullet.is_shooting:
-					bullet.shoot($BulletSpawn.global_position, rotation, bullet_speed, bullet_lifetime)
+					bullet.shoot(spawn_pos, rotation, bullet_speed, bullet_lifetime)
 
 				bullet_index += 1
 
@@ -76,7 +77,7 @@ func _process(delta: float) -> void:
 					bullet_index = 0
 
 			Kind.SWORD:
-				$Bullet_Sword.shoot($BulletSpawn.global_position, 0, bullet_speed, bullet_lifetime)
+				$Bullet_Sword.shoot(spawn_pos, 0, bullet_speed, bullet_lifetime)
 				state_machine.travel("attack")
 
 func attack() -> void:

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://4gj8f5rkvm33"]
+
+[ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="1_hmfjc"]
+[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_0rc7p"]
+
+[node name="Weapons Test" type="Node2D"]
+
+[node name="Player" parent="." node_paths=PackedStringArray("weapons") instance=ExtResource("1_hmfjc")]
+position = Vector2(752, 612)
+weapons = [NodePath("weapon - SWORD")]
+
+[node name="Enemy" parent="." instance=ExtResource("2_0rc7p")]
+position = Vector2(338, 244)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_0rc7p")]
+position = Vector2(905, 276)

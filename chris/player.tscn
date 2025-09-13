@@ -31,7 +31,7 @@ height = 38.0
 
 [node name="Player" type="Area2D" node_paths=PackedStringArray("weapons")]
 script = ExtResource("1_wt2hm")
-weapons = [NodePath("weapon - BEAM"), NodePath("weapon - MACHINE GUN"), NodePath("weapon - sword")]
+weapons = [NodePath("weapon - BEAM"), NodePath("weapon - MACHINE GUN"), NodePath("weapon - SWORD")]
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -53,7 +53,7 @@ bullet_lifetime = 0.1
 position = Vector2(-90, 0)
 rotation = -0.261799
 
-[node name="weapon - sword" parent="." instance=ExtResource("7_aamy7")]
+[node name="weapon - SWORD" parent="." instance=ExtResource("7_aamy7")]
 position = Vector2(90, 0)
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
