@@ -25,13 +25,38 @@ func new_game() -> void:
 	$HUD.show_message("Trip", wait)
 	await get_tree().create_timer(wait).timeout
 
+	load_add_weapon()
+
+# battle signals
+func on_player_score(score: int, wave: int) -> void:
+	$HUD.update_score(score, wave)
+
+func on_player_death() -> void:
+	$HUD.show_game_over()
+	load_scene(State.START_MENU)
+
+func on_battle_win() -> void:
+	player.hide()
+	load_add_weapon()
+
+# add_weapon signals
+func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
+	player.equip_weapon(weapon_scene, slot)
+	load_battle()
+
+
+func load_add_weapon() -> void:
 	var weapon_scene := load_scene(State.PICK_WEAPON)
 	weapon_scene.confirm_weapon_and_slot.connect(on_weapon_chosen)
 
-func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
-	player.equip_weapon(weapon_scene, slot)
+func load_battle() -> void:
 	var battle_scene := load_scene(State.BATTLE)
 	battle_scene.init(player)
+
+	battle_scene.player_score.connect(on_player_score)
+	battle_scene.player_death.connect(on_player_death)
+	battle_scene.battle_win.connect(on_battle_win)
+	
 
 func load_scene(new_state: State) -> Node:
 	state = new_state

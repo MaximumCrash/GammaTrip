@@ -1,5 +1,9 @@
 extends Node
 
+signal player_score
+signal player_death
+signal battle_win
+
 @export_group("Player")
 @export var player_speed: float = 500
 @export var min_enemy_speed: float= 200
@@ -25,8 +29,8 @@ func init(player: Player) -> void:
 
 	player.show()
 	player.start(player_speed, $StartPos.position)
+	player.death.connect(game_over)
 
-func _on_start_timer_timeout() -> void:
 	$MobTimer.start()
 	$ScoreTimer.start()
 
@@ -55,7 +59,6 @@ func _on_mob_timer_timeout() -> void:
 	mob.explode.connect(_on_mob_explode)
 	spawn_count += 1
 
-
 func _process(delta: float) -> void:
 	for enemy in enemies:
 		enemy.progress += delta * max_enemy_speed
@@ -63,8 +66,7 @@ func _process(delta: float) -> void:
 func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	$HUD.show_game_over()
-
+	player_death.emit()
 
 func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 	var idx := enemies.find(enemy)
@@ -83,9 +85,14 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 		wave_kind = randi_range(0, 2)
 		wave += 1
 
+		if wave == 2:
+			player_score.emit(score, wave)
+			battle_win.emit()
+			return
+
 		var wait:float = $MobTimer.wait_time
 		wait -= 0.1
 		wait = max(min_enemy_spawn_rate, wait)
 		$MobTimer.wait_time = wait
 
-	$HUD.update_score(score, wave)
+	player_score.emit(score, wave)

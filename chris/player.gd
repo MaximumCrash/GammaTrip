@@ -1,7 +1,7 @@
 class_name Player
 extends Area2D
 
-signal hit
+signal death
 @export var speed := 400.0
 var screen_size: Vector2
 
@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	hide()
-	hit.emit()
+	death.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
 
 
