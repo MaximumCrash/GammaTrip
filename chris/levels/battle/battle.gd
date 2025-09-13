@@ -78,7 +78,8 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 	$EnemyExplode.global_position = global_pos
 	$EnemyExplode.restart()
 
-	score += 1
+	var enemy_score_value := 1
+	score += enemy_score_value
 
 	# pick random move path
 	if score % enemies_per_wave == 0:
@@ -86,7 +87,7 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 		wave += 1
 
 		if wave == 2:
-			player_score.emit(score, wave)
+			player_score.emit(enemy_score_value, wave)
 			battle_win.emit()
 			return
 
@@ -95,4 +96,4 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 		wait = max(min_enemy_spawn_rate, wait)
 		$MobTimer.wait_time = wait
 
-	player_score.emit(score, wave)
+	player_score.emit(enemy_score_value, wave)

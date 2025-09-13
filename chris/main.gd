@@ -10,6 +10,7 @@ var state := State.START_MENU
 @export var player : Player
 
 var active_scene : Node
+var total_score := 0
 
 func _ready() -> void:
 	start_button.pressed.connect(new_game)
@@ -29,7 +30,8 @@ func new_game() -> void:
 
 # battle signals
 func on_player_score(score: int, wave: int) -> void:
-	$HUD.update_score(score, wave)
+	total_score += score
+	$HUD.update_score(total_score, wave)
 
 func on_player_death() -> void:
 	$HUD.show_game_over()
