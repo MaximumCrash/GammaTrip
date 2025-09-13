@@ -38,7 +38,6 @@ func on_player_death() -> void:
 	load_scene(State.START_MENU)
 
 func on_battle_win() -> void:
-	player.hide()
 	load_add_weapon()
 
 # add_weapon signals

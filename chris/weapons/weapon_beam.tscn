@@ -38,6 +38,8 @@ script = ExtResource("1_vg8ij")
 bullet_scene = ExtResource("2_2o7p5")
 bullet_speed = 0.0
 fire_rate_ms = 0.05
+bullet_lifetime = 0.1
+num_bullets = 20
 kind = 1
 charge_time = 1.0
 
