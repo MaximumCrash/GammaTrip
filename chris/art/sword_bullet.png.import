@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds66h3kbhxoaa"
-path="res://.godot/imported/ship_move_0.png-845dbc805d1f2ae726980ced4d847243.ctex"
+uid="uid://bvf2ekvss5q5q"
+path="res://.godot/imported/sword_bullet.png-2a434da69d62d0df1622e0e2b175b80a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chris/ship_move_0.png"
-dest_files=["res://.godot/imported/ship_move_0.png-845dbc805d1f2ae726980ced4d847243.ctex"]
+source_file="res://chris/art/sword_bullet.png"
+dest_files=["res://.godot/imported/sword_bullet.png-2a434da69d62d0df1622e0e2b175b80a.ctex"]
 
 [params]
 

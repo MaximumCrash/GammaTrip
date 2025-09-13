@@ -13,7 +13,7 @@ var last_fire_time := 0.0
 var bullets: Array[Bullet] 
 var bullet_index: int
 
-enum Kind {MACHINE_GUN, BEAM}
+enum Kind {MACHINE_GUN, BEAM, SWORD}
 @export var kind: Kind
 
 @export var charge_time := 0.5
@@ -21,18 +21,29 @@ var charge_timer := 0.0
 
 var is_attack:= false
 
-func init() -> void:
-	bullet_index = 0
+var state_machine: AnimationNodeStateMachinePlayback
 
-	var root:Node = get_tree().get_root()
-	for i in range(0, num_bullets):
-		var bullet:Bullet = bullet_scene.instantiate()
-		root.add_child(bullet)
-		bullet.set_state(false)
-		bullets.push_back(bullet)
+func init() -> void:
+	match kind:
+		Kind.MACHINE_GUN, Kind.BEAM:
+			bullet_index = 0
+
+			var root:Node = get_tree().get_root()
+			for i in range(0, num_bullets):
+				var bullet:Bullet = bullet_scene.instantiate()
+				root.add_child(bullet)
+				bullet.set_state(false)
+				bullets.push_back(bullet)
+
+		Kind.SWORD:
+			state_machine = $AnimationTree.get("parameters/playback")
 
 func _process(delta: float) -> void:
 	match kind:
+		Kind.MACHINE_GUN, Kind.SWORD:
+			if !is_attack:
+				return
+
 		Kind.BEAM:
 			if !is_attack:
 				charge_timer = 0
@@ -47,25 +58,26 @@ func _process(delta: float) -> void:
 				is_attack = false
 				return
 
-		Kind.MACHINE_GUN:
-			if !is_attack:
-				return
-
 	is_attack = false
 
 	var time := Time.get_ticks_msec()
 	if time - last_fire_time > fire_rate_ms:
 		last_fire_time = time
 
-		var bullet := bullets[bullet_index]
-		if !bullet.is_shooting:
-			var spawn_pos:Vector2 = $BulletSpawn.global_position
-			bullet.shoot(spawn_pos, rotation, bullet_speed, bullet_lifetime)
+		match kind:
+			Kind.MACHINE_GUN, Kind.BEAM:
+				var bullet := bullets[bullet_index]
+				if !bullet.is_shooting:
+					bullet.shoot($BulletSpawn.global_position, rotation, bullet_speed, bullet_lifetime)
 
-		bullet_index += 1
+				bullet_index += 1
 
-		if bullet_index >= num_bullets:
-			bullet_index = 0
+				if bullet_index >= num_bullets:
+					bullet_index = 0
+
+			Kind.SWORD:
+				$Bullet_Sword.shoot($BulletSpawn.global_position, 0, bullet_speed, bullet_lifetime)
+				state_machine.travel("attack")
 
 func attack() -> void:
 	is_attack = true

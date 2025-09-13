@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj7bcxbjvbxmn"]
+
+[ext_resource type="Script" uid="uid://xpismhd3v2t5" path="res://chris/weapons/bullet.gd" id="1_uhmvx"]
+[ext_resource type="Texture2D" uid="uid://bvf2ekvss5q5q" path="res://chris/art/sword_bullet.png" id="2_iarku"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhmvx"]
+size = Vector2(27, 60.04)
+
+[node name="Bullet_Sword" type="Area2D"]
+script = ExtResource("1_uhmvx")
+damage = 100
+metadata/_custom_type_script = "uid://xpismhd3v2t5"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-19, -28)
+texture = ExtResource("2_iarku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-13.5, -30.02)
+shape = SubResource("RectangleShape2D_uhmvx")

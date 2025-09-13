@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://brc6gbav3cyy5"]
+
+[ext_resource type="Script" uid="uid://bwy28yvaryfbf" path="res://chris/weapons/weapon.gd" id="1_8cafy"]
+[ext_resource type="PackedScene" uid="uid://bj7bcxbjvbxmn" path="res://chris/weapons/bullet_sword.tscn" id="2_a1826"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a1826"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t1shg"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1826"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5s4vs"]
+states/attack/node = SubResource("AnimationNodeAnimation_a1826")
+states/attack/position = Vector2(545, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_t1shg")
+states/idle/position = Vector2(698, 100)
+transitions = ["attack", "idle", SubResource("AnimationNodeStateMachineTransition_a1826")]
+
+[sub_resource type="Animation" id="Animation_8cafy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet_Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.309]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bullet_Sword:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_a1826"]
+resource_name = "sword_swing"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet_Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.309, 2.18166]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bullet_Sword:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_t1shg"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bullet_Sword:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t1shg"]
+_data = {
+&"RESET": SubResource("Animation_8cafy"),
+&"attack": SubResource("Animation_a1826"),
+&"idle": SubResource("Animation_t1shg")
+}
+
+[node name="Sword" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_8cafy")
+bullet_speed = 0.0
+bullet_lifetime = 10.0
+num_bullets = 0
+kind = 2
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+
+[node name="Bullet_Sword" parent="." instance=ExtResource("2_a1826")]
+visible = false
+rotation = -1.309
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_5s4vs")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t1shg")
+}
