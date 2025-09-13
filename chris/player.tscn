@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://juqw07ibbuhk"]
+[gd_scene load_steps=7 format=3 uid="uid://juqw07ibbuhk"]
 
 [ext_resource type="Script" uid="uid://bpxwwad7rv8x4" path="res://chris/player.gd" id="1_wt2hm"]
-[ext_resource type="PackedScene" uid="uid://cddewn5ij6onj" path="res://chris/weapons/weapon.tscn" id="2_aamy7"]
 [ext_resource type="Texture2D" uid="uid://bsmhmx302nd56" path="res://chris/art/ship_idle.png" id="2_sv2wq"]
 [ext_resource type="Texture2D" uid="uid://ds66h3kbhxoaa" path="res://chris/art/ship_move_0.png" id="3_aamy7"]
 [ext_resource type="Texture2D" uid="uid://6lhdw6ap64v1" path="res://chris/art/ship_move_1.png" id="4_wcbek"]
-[ext_resource type="PackedScene" uid="uid://dcqpa60sl8w2d" path="res://chris/weapons/weapon_beam.tscn" id="6_aamy7"]
-[ext_resource type="PackedScene" uid="uid://brc6gbav3cyy5" path="res://chris/weapons/weapon_sword.tscn" id="7_aamy7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_el8e8"]
 animations = [{
@@ -29,9 +26,9 @@ animations = [{
 radius = 19.0
 height = 38.0
 
-[node name="Player" type="Area2D" node_paths=PackedStringArray("weapons")]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("weapon_slots")]
 script = ExtResource("1_wt2hm")
-weapons = [NodePath("weapon - BEAM"), NodePath("weapon - MACHINE GUN"), NodePath("weapon - SWORD")]
+weapon_slots = [NodePath("WeaponSlot0"), NodePath("WeaponSlot1"), NodePath("WeaponSlot2")]
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -44,16 +41,15 @@ frame_progress = 0.904468
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_un1w1")
 
-[node name="weapon - BEAM" parent="." instance=ExtResource("6_aamy7")]
-position = Vector2(0, -107)
-fire_rate_ms = 0.0
-bullet_lifetime = 0.1
+[node name="WeaponSlot0" type="Marker2D" parent="."]
+position = Vector2(0, -100)
 
-[node name="weapon - MACHINE GUN" parent="." instance=ExtResource("2_aamy7")]
+[node name="WeaponSlot1" type="Marker2D" parent="."]
 position = Vector2(-90, 0)
 rotation = -0.261799
 
-[node name="weapon - SWORD" parent="." instance=ExtResource("7_aamy7")]
+[node name="WeaponSlot2" type="Marker2D" parent="."]
 position = Vector2(90, 0)
+rotation = 0.261799
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

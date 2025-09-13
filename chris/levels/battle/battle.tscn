@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://cb3tyecuy2mog"]
+
+[ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/levels/battle/battle.gd" id="1_1wjgi"]
+[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_tlkdk"]
+[ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_7hhe8"]
+
+[sub_resource type="Curve2D" id="Curve2D_5i7a3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1456, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_fnt0s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1080)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_81mca"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -8, 0, 0, -280.229, 0, 280.229, 272, 496, 0, 0, 0, 0, 0, 1072)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_mkd0d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -2, -154, 2, 154, 440, 232, 0, -223.85, 0, 223.85, -256, 696, 0, 0, 0, 0, 0, 1072)
+}
+point_count = 4
+
+[node name="Battle" type="Node"]
+script = ExtResource("1_1wjgi")
+mob_scene = ExtResource("2_tlkdk")
+
+[node name="MobTimer" type="Timer" parent="."]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartPos" type="Marker2D" parent="."]
+position = Vector2(640, 540)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_5i7a3")
+
+[node name="MobSpawn" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-0.261047, 0)
+
+[node name="EnemyExplode" parent="." instance=ExtResource("5_7hhe8")]
+
+[node name="Paths" type="Node" parent="."]
+
+[node name="Line" type="Path2D" parent="Paths"]
+position = Vector2(640, 0)
+curve = SubResource("Curve2D_fnt0s")
+
+[node name="Curve" type="Path2D" parent="Paths"]
+position = Vector2(640, 0)
+curve = SubResource("Curve2D_81mca")
+
+[node name="S_Curve" type="Path2D" parent="Paths"]
+position = Vector2(640, 0)
+curve = SubResource("Curve2D_mkd0d")
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

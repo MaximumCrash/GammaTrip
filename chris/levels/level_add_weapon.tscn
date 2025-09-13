@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs7t1cwlkmd5d"]
+
+[ext_resource type="Script" uid="uid://oi1x8kgo5uw8" path="res://chris/levels/level_add_weapon.gd" id="1_6g8rc"]
+[ext_resource type="PackedScene" uid="uid://cddewn5ij6onj" path="res://chris/weapons/weapon_machinegun.tscn" id="2_tsuco"]
+[ext_resource type="PackedScene" uid="uid://dcqpa60sl8w2d" path="res://chris/weapons/weapon_beam.tscn" id="3_mu8bv"]
+[ext_resource type="PackedScene" uid="uid://brc6gbav3cyy5" path="res://chris/weapons/weapon_sword.tscn" id="4_hr2f8"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_mu8bv"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_tsuco"]
+
+[node name="Level_Add_Weapon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6g8rc")
+weapon_scenes = Array[PackedScene]([ExtResource("2_tsuco"), ExtResource("3_mu8bv"), ExtResource("4_hr2f8")])
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Sword" parent="Weapons" instance=ExtResource("4_hr2f8")]
+
+[node name="MachineGun" parent="Weapons" instance=ExtResource("2_tsuco")]
+
+[node name="Beam" parent="Weapons" instance=ExtResource("3_mu8bv")]
+
+[node name="Weapon" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Weapon"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 328.0
+offset_right = 707.0
+offset_bottom = 351.0
+text = "Choose a weapon to add to your ship:"
+
+[node name="WeaponPicker" type="BoxContainer" parent="Weapon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 388.0
+offset_top = 356.5
+offset_right = 852.0
+offset_bottom = 387.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheckBox" type="CheckBox" parent="Weapon/WeaponPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Weapon"
+
+[node name="CheckBox2" type="CheckBox" parent="Weapon/WeaponPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Weapon"
+
+[node name="CheckBox3" type="CheckBox" parent="Weapon/WeaponPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Weapon"
+
+[node name="CheckBox4" type="CheckBox" parent="Weapon/WeaponPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Weapon"
+
+[node name="CheckBox5" type="CheckBox" parent="Weapon/WeaponPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Weapon"
+
+[node name="Slot" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Slot"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 520.0
+offset_right = 524.0
+offset_bottom = 543.0
+text = "Choose a slot on your ship:"
+
+[node name="SlotPicker" type="BoxContainer" parent="Slot"]
+layout_mode = 2
+offset_left = 416.0
+offset_top = 560.0
+offset_right = 880.0
+offset_bottom = 591.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheckBox" type="CheckBox" parent="Slot/SlotPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_tsuco")
+text = "Center"
+
+[node name="CheckBox2" type="CheckBox" parent="Slot/SlotPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_tsuco")
+text = "Left"
+
+[node name="CheckBox3" type="CheckBox" parent="Slot/SlotPicker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_tsuco")
+text = "Right"
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 688.0
+offset_right = 487.0
+offset_bottom = 719.0
+text = "Confirm"

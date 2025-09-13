@@ -1,105 +1,54 @@
-extends Node
+extends Node2D
 
-@export_group("Player")
-@export var player_speed: float = 500
-@export var min_enemy_speed: float= 200
-@export var max_enemy_speed: float = 400
-var score: int
+enum State {START_MENU, PICK_WEAPON, BATTLE}
+var state := State.START_MENU
 
-@export_group("Enemy")
-@export var mob_scene: PackedScene
-@export var min_enemy_hp := 1
-@export var max_enemy_hp := 5
-@export var min_enemy_spawn_rate := 0.1
+@export var scene_battle     : PackedScene
+@export var scene_add_weapon : PackedScene
 
-var enemies: Array[Enemy]
-var spawn_count: int
-var wave: int
+@export var start_button : Button
+@export var player : Player
 
-@export var enemies_per_wave := 10
-var wave_kind: int
+var active_scene : Node
 
 func _ready() -> void:
-	wave = 1
-	wave_kind = 0
-	$Player.hide()
-
-func _on_hud_start_game() -> void:
-	new_game()
+	start_button.pressed.connect(new_game)
+	player.hide()
 
 func new_game() -> void:
-	score = 0
+	start_button.hide()
+
 	$StartTimer.start()
-	$HUD.update_score(score, wave)
 	var wait: float = 0.75
 	$HUD.show_message("Gamma", wait)
 	await get_tree().create_timer(wait).timeout
 	$HUD.show_message("Trip", wait)
 	await get_tree().create_timer(wait).timeout
 
-	$Player.show()
-	$Player.start(player_speed, $StartPos.position)
+	var weapon_scene := load_scene(State.PICK_WEAPON)
+	weapon_scene.confirm_weapon_and_slot.connect(on_weapon_chosen)
 
-func _on_start_timer_timeout() -> void:
-	$MobTimer.start()
-	$ScoreTimer.start()
+func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
+	player.equip_weapon(weapon_scene, slot)
+	var battle_scene := load_scene(State.BATTLE)
+	battle_scene.init(player)
 
-func _on_mob_timer_timeout() -> void:
-	var mob: Enemy = mob_scene.instantiate()
-	mob.hp = randi_range(min_enemy_hp, max_enemy_hp)
+func load_scene(new_state: State) -> Node:
+	state = new_state
 
-	var mob_spawn_location:Node = $MobPath/MobSpawn
-	mob_spawn_location.progress_ratio = randf()
-	var spawn_pos:Vector2 = mob_spawn_location.position
+	if active_scene != null:
+		active_scene.queue_free()
+		active_scene = null
 
-	var path: Path2D
-	match wave_kind:
-		0:
-			path = $Paths/Line
-		1:
-			path = $Paths/Curve
-		2:
-			path = $Paths/S_Curve
-			
-	mob.h_offset = path.position.x - spawn_pos.x
+	var scene : Node
+	match state:
+		State.PICK_WEAPON:
+			scene = scene_add_weapon.instantiate()
+		State.BATTLE:
+			scene = scene_battle.instantiate()
 
-	path.add_child(mob)
-	enemies.push_back(mob)
+	$ActiveSceneRoot.add_child(scene)
+	active_scene = scene
 
-	mob.explode.connect(_on_mob_explode)
-	spawn_count += 1
-
-
-func _process(delta: float) -> void:
-	for enemy in enemies:
-		enemy.progress += delta * max_enemy_speed
-
-func game_over() -> void:
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.show_game_over()
-
-
-func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
-	var idx := enemies.find(enemy)
-
-	if idx == -1:
-		return
-
-	enemies.remove_at(idx)
-	$EnemyExplode.global_position = global_pos
-	$EnemyExplode.restart()
-
-	score += 1
-
-	# pick random move path
-	if score % enemies_per_wave == 0:
-		wave_kind = randi_range(0, 2)
-		wave += 1
-
-		var wait:float = $MobTimer.wait_time
-		wait -= 0.1
-		wait = max(min_enemy_spawn_rate, wait)
-		$MobTimer.wait_time = wait
-
-	$HUD.update_score(score, wave)
+	return scene
+	

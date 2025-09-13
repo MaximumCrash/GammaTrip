@@ -5,17 +5,11 @@ signal hit
 @export var speed := 400.0
 var screen_size: Vector2
 
-@export var weapons: Array[Weapon]
+@export var weapon_slots: Array[Node2D]
+var weapons: Array[Weapon]
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-
-	# HACK doing this immediately fails
-	var wait: float = 0.01
-	await get_tree().create_timer(wait).timeout
-
-	for weapon in weapons:
-		weapon.init()
 
 func start(player_speed: float, pos: Vector2) -> void:
 	speed = player_speed
@@ -55,9 +49,6 @@ func _process(delta: float) -> void:
 		dir = 0
 
 	$AnimatedSprite2D.rotation_degrees = dir
-		
-
-
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
@@ -70,3 +61,10 @@ func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, 
 	hide()
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
+
+
+func equip_weapon(weapon_scene: PackedScene, slot: int) -> void:
+	var weapon : Weapon = weapon_scene.instantiate()
+	weapon_slots[slot].add_child(weapon)
+	weapons.push_back(weapon)
+	weapon.init()

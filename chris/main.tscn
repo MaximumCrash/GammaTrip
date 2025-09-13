@@ -1,78 +1,39 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb3tyecuy2mog"]
+[gd_scene load_steps=6 format=3 uid="uid://dgv07m0rfnmo6"]
 
-[ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/main.gd" id="1_rd8nt"]
-[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_8f6ys"]
-[ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="3_8f6ys"]
+[ext_resource type="Script" uid="uid://cs42mix8i5u6p" path="res://chris/main.gd" id="1_rd8nt"]
+[ext_resource type="PackedScene" uid="uid://cb3tyecuy2mog" path="res://chris/levels/battle/battle.tscn" id="2_8f6ys"]
+[ext_resource type="PackedScene" uid="uid://bs7t1cwlkmd5d" path="res://chris/levels/level_add_weapon.tscn" id="3_awu87"]
 [ext_resource type="PackedScene" uid="uid://drf8njxyveqp2" path="res://chris/hud.tscn" id="4_awu87"]
-[ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_fnt0s"]
+[ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="5_fnt0s"]
 
-[sub_resource type="Curve2D" id="Curve2D_5i7a3"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1456, 0)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_fnt0s"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1080)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_81mca"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -8, 0, 0, -280.229, 0, 280.229, 272, 496, 0, 0, 0, 0, 0, 1072)
-}
-point_count = 3
-
-[sub_resource type="Curve2D" id="Curve2D_mkd0d"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -2, -154, 2, 154, 440, 232, 0, -223.85, 0, 223.85, -256, 696, 0, 0, 0, 0, 0, 1072)
-}
-point_count = 4
-
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("start_button", "player")]
 script = ExtResource("1_rd8nt")
-mob_scene = ExtResource("2_8f6ys")
+scene_battle = ExtResource("2_8f6ys")
+scene_add_weapon = ExtResource("3_awu87")
+start_button = NodePath("StartButton")
+player = NodePath("Player")
 
-[node name="MobTimer" type="Timer" parent="."]
+[node name="HUD" parent="." instance=ExtResource("4_awu87")]
 
-[node name="ScoreTimer" type="Timer" parent="."]
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 526.5
+offset_top = 691.555
+offset_right = 753.5
+offset_bottom = 791.555
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "! Start !"
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
-[node name="StartPos" type="Marker2D" parent="."]
-position = Vector2(640, 540)
+[node name="Player" parent="." instance=ExtResource("5_fnt0s")]
 
-[node name="MobPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_5i7a3")
-
-[node name="MobSpawn" type="PathFollow2D" parent="MobPath"]
-position = Vector2(-0.261047, 0)
-
-[node name="Player" parent="." instance=ExtResource("3_8f6ys")]
-
-[node name="HUD" parent="." instance=ExtResource("4_awu87")]
-
-[node name="EnemyExplode" parent="." instance=ExtResource("5_fnt0s")]
-
-[node name="Paths" type="Node" parent="."]
-
-[node name="Line" type="Path2D" parent="Paths"]
-position = Vector2(640, 0)
-curve = SubResource("Curve2D_fnt0s")
-
-[node name="Curve" type="Path2D" parent="Paths"]
-position = Vector2(640, 0)
-curve = SubResource("Curve2D_81mca")
-
-[node name="S_Curve" type="Path2D" parent="Paths"]
-position = Vector2(640, 0)
-curve = SubResource("Curve2D_mkd0d")
-
-[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
-[connection signal="hit" from="Player" to="." method="game_over"]
-[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[node name="ActiveSceneRoot" type="Node2D" parent="."]
