@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 			Kind.MACHINE_GUN, Kind.BEAM:
 				var bullet := bullets[bullet_index]
 				if !bullet.is_shooting:
-					bullet.shoot(spawn_pos, rotation, bullet_speed, bullet_lifetime)
+					bullet.shoot(spawn_pos, global_rotation, bullet_speed, bullet_lifetime)
 
 				bullet_index += 1
 
