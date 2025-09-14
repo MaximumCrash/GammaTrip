@@ -12,14 +12,7 @@ var killed_this_wave := 0
 
 @export_group("Player")
 @export var player_speed: float = 500
-@export var min_enemy_speed: float= 200
-@export var max_enemy_speed: float = 400
 var score: int
-
-@export_group("Enemy")
-@export var mob_scene: PackedScene
-@export var min_enemy_hp := 1
-@export var max_enemy_hp := 5
 
 var enemies: Array[Enemy]
 var spawn_count: int
@@ -35,20 +28,12 @@ func init(player: Player) -> void:
 	player.start(player_speed, $StartPos.position)
 	player.death.connect(game_over)
 
-	$MobTimer.wait_time = wave_data[wave].enemy_spawn_rate
-	$MobTimer.start()
+	spawn_wave(wave)
 
-func _on_mob_timer_timeout() -> void:
-	var mob: Enemy = mob_scene.instantiate()
-	mob.hp = randi_range(min_enemy_hp, max_enemy_hp)
+func spawn_wave(wave_idx: int) -> void:
+	var current_wave := wave_data[wave_idx]
 
-	var mob_spawn_location:Node = $MobPath/MobSpawn
-	mob_spawn_location.progress_ratio = randf()
-	var spawn_pos:Vector2 = mob_spawn_location.position
-
-	var current_wave := wave_data[wave]
 	var path: Path2D
-
 	match current_wave.path:
 		Path.LINE:
 			path = $Paths/Line
@@ -56,25 +41,41 @@ func _on_mob_timer_timeout() -> void:
 			path = $Paths/Curve
 		Path.S_CURVE:
 			path = $Paths/S_Curve
+
+	for i in range(current_wave.num_enemies):
+		var mob: Enemy = current_wave.enemy_scene.instantiate()
+
+		var hp    := randi_range(current_wave.min_enemy_hp, current_wave.max_enemy_hp)
+		var speed := randf_range(current_wave.min_enemy_speed, current_wave.max_enemy_speed) 
+
+		mob.init(hp, speed)
+
+		var mob_spawn_location:Node = $MobPath/MobSpawn
+		mob_spawn_location.progress_ratio = randf()
+		var spawn_pos:Vector2 = mob_spawn_location.position
 			
-	mob.h_offset = path.position.x - spawn_pos.x
+		mob.h_offset = path.position.x - spawn_pos.x
 
-	path.add_child(mob)
-	enemies.push_back(mob)
+		path.add_child(mob)
+		enemies.push_back(mob)
 
-	mob.explode.connect(_on_mob_explode)
-	spawn_count += 1
+		mob.explode.connect(_on_mob_explode)
+		spawn_count += 1
+
+	player_score.emit(0, wave+1)
 
 func _process(delta: float) -> void:
 	for enemy in enemies:
-		enemy.progress += delta * max_enemy_speed
+		enemy.progress += delta * enemy.move_speed
+
+		if enemy.progress_ratio >= 1.0:
+			enemy.path_completed()
 
 func game_over() -> void:
-	$MobTimer.stop()
 	player_death.emit()
 	is_battle_over = true
 
-func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
+func _on_mob_explode(enemy: Enemy, global_pos: Vector2, killed_by_player: bool) -> void:
 	if is_battle_over:
 		return
 
@@ -88,9 +89,6 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 	$EnemyExplode.restart()
 	killed_this_wave += 1
 
-	var enemy_score_value := 1
-	score += enemy_score_value
-
 	var current_wave := wave_data[wave]
 	var remaining_enemies := current_wave.num_enemies - killed_this_wave
 
@@ -102,10 +100,11 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2) -> void:
 			battle_win.emit()
 			is_battle_over = true
 			return
+		else:
+			spawn_wave(wave)
 
-		var wait:float = current_wave.enemy_spawn_rate
-		wait -= 0.1
-		wait = max(current_wave.min_enemy_spawn_rate, wait)
-		$MobTimer.wait_time = wait
-
-	player_score.emit(enemy_score_value, wave+1)
+	# enemies are also destroyed by going off screen
+	if killed_by_player:
+		var enemy_score_value := 1
+		score += enemy_score_value
+		player_score.emit(enemy_score_value, wave+1)

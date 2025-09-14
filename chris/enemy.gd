@@ -15,22 +15,21 @@ var killed_by_player := true
 @export_group("Health")
 @export var hp := 1
 
+func init(health: int, speed: float) -> void:
+	hp = health
+	move_speed = speed
+
 func _ready() -> void:
 	var mob_types: Array = Array(anim.sprite_frames.get_animation_names())
 	anim.animation = mob_types.pick_random()
 	anim.play()
 
-func _physics_proces(delta: float) -> void:
-	path_follow.progress += move_speed * delta
-	body.global_position = path_follow.global_position
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+func path_completed() -> void:
 	killed_by_player = false
 	queue_free()
 
 func _exit_tree() -> void:
-	if killed_by_player:
-		explode.emit(self, global_position)
+	explode.emit(self, global_position, killed_by_player)
 
 func damage(amount: int) -> void:
 	hp -= amount

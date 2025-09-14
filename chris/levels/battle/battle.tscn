@@ -7,32 +7,38 @@
 
 [sub_resource type="Resource" id="Resource_mlwgt"]
 script = ExtResource("2_t5qii")
-path = 0
 num_enemies = 5
-min_hp = 1
-max_hp = 5
+enemy_scene = ExtResource("2_tlkdk")
 enemy_spawn_rate = 1.0
-min_enemy_spawn_rate = 0.2
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 0
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_fb0ye"]
 script = ExtResource("2_t5qii")
-path = 1
 num_enemies = 5
-min_hp = 1
-max_hp = 5
+enemy_scene = ExtResource("2_tlkdk")
 enemy_spawn_rate = 1.0
-min_enemy_spawn_rate = 0.2
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 1
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_2olxs"]
 script = ExtResource("2_t5qii")
-path = 2
 num_enemies = 10
-min_hp = 1
-max_hp = 5
+enemy_scene = ExtResource("2_tlkdk")
 enemy_spawn_rate = 1.0
-min_enemy_spawn_rate = 0.2
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 2
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
@@ -62,9 +68,6 @@ point_count = 4
 [node name="Battle" type="Node"]
 script = ExtResource("1_1wjgi")
 wave_data = Array[ExtResource("2_t5qii")]([SubResource("Resource_mlwgt"), SubResource("Resource_fb0ye"), SubResource("Resource_2olxs")])
-mob_scene = ExtResource("2_tlkdk")
-
-[node name="MobTimer" type="Timer" parent="."]
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -82,16 +85,15 @@ position = Vector2(-0.261047, 0)
 [node name="Paths" type="Node" parent="."]
 
 [node name="Line" type="Path2D" parent="Paths"]
-position = Vector2(640, 0)
+position = Vector2(512, 0)
 curve = SubResource("Curve2D_fnt0s")
 
 [node name="Curve" type="Path2D" parent="Paths"]
-position = Vector2(640, 0)
+position = Vector2(512, 0)
 curve = SubResource("Curve2D_81mca")
 
 [node name="S_Curve" type="Path2D" parent="Paths"]
-position = Vector2(640, 0)
+position = Vector2(512, 0)
 curve = SubResource("Curve2D_mkd0d")
 
-[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
