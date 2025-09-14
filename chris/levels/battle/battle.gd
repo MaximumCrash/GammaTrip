@@ -14,12 +14,17 @@ var killed_this_wave := 0
 @export var player_speed: float = 500
 var score: int
 
+@export_group("Path")
+@export var path_scenes : Array[PackedScene]
+@export var path_origins : Array[Node2D]
+
 var enemies: Array[Enemy]
 var spawn_count: int
 var wave: int
 var is_battle_over := false
 
-enum Path {LINE, CURVE, S_CURVE}
+enum Path {LINE, QUADRATIC, CUBIC}
+enum PathOrigin {TOP, RIGHT, BOTTOM, LEFT}
 
 func init(player: Player) -> void:
 	wave = 0
@@ -33,14 +38,22 @@ func init(player: Player) -> void:
 func spawn_wave(wave_idx: int) -> void:
 	var current_wave := wave_data[wave_idx]
 
-	var path: Path2D
-	match current_wave.path:
-		Path.LINE:
-			path = $Paths/Line
-		Path.CURVE:
-			path = $Paths/Curve
-		Path.S_CURVE:
-			path = $Paths/S_Curve
+	var path_idx := current_wave.path
+	var root := get_tree().get_root()
+
+	var path_rotation := 0.0
+	var path_origin := path_origins[current_wave.path_origin]
+	match current_wave.path_origin:
+		PathOrigin.TOP:
+			path_rotation = 0
+		PathOrigin.RIGHT:
+			path_rotation = 90.0
+		PathOrigin.BOTTOM:
+			path_rotation = 180.0
+		PathOrigin.LEFT:
+			path_rotation = 270.0
+
+	var mob_spawn_location:Node = path_origin.get_node("Spawn")
 
 	for i in range(current_wave.num_enemies):
 		var mob: Enemy = current_wave.enemy_scene.instantiate()
@@ -50,13 +63,26 @@ func spawn_wave(wave_idx: int) -> void:
 
 		mob.init(hp, speed)
 
-		var mob_spawn_location:Node = $MobPath/MobSpawn
 		mob_spawn_location.progress_ratio = randf()
-		var spawn_pos:Vector2 = mob_spawn_location.position
+		var spawn_pos:Vector2 = mob_spawn_location.global_position
 			
-		mob.h_offset = path.position.x - spawn_pos.x
+		var path : Path2D = path_scenes[path_idx].instantiate()
+		var curve := Curve2D.new()
+		var screen_size: Vector2 = get_viewport().size
+		for point in path.curve.get_baked_points():
+			var norm_point := point.normalized()
+			var p := Vector2.ZERO
+			p.x = norm_point.x * screen_size.x
+			p.y = norm_point.y * screen_size.y
+			curve.add_point(p)
 
+		path.set_curve(curve)
+		path.rotation_degrees = path_rotation
+
+		path.global_position = spawn_pos
+		root.add_child(path)
 		path.add_child(mob)
+
 		enemies.push_back(mob)
 
 		mob.explode.connect(_on_mob_explode)

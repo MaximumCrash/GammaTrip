@@ -11,5 +11,6 @@ extends Resource
 
 @export_group("Movement")
 @export var path : Battle.Path
+@export var path_origin : Battle.PathOrigin
 @export var min_enemy_speed := 200.0
 @export var max_enemy_speed := 400.0
