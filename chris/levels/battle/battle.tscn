@@ -1,8 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb3tyecuy2mog"]
+[gd_scene load_steps=12 format=3 uid="uid://cb3tyecuy2mog"]
 
 [ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/levels/battle/battle.gd" id="1_1wjgi"]
+[ext_resource type="Script" uid="uid://dld85dd8y8j3w" path="res://chris/levels/battle/wave_data.gd" id="2_t5qii"]
 [ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_tlkdk"]
 [ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_7hhe8"]
+
+[sub_resource type="Resource" id="Resource_mlwgt"]
+script = ExtResource("2_t5qii")
+path = 0
+num_enemies = 5
+min_hp = 1
+max_hp = 5
+enemy_spawn_rate = 1.0
+min_enemy_spawn_rate = 0.2
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_fb0ye"]
+script = ExtResource("2_t5qii")
+path = 1
+num_enemies = 5
+min_hp = 1
+max_hp = 5
+enemy_spawn_rate = 1.0
+min_enemy_spawn_rate = 0.2
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_2olxs"]
+script = ExtResource("2_t5qii")
+path = 2
+num_enemies = 10
+min_hp = 1
+max_hp = 5
+enemy_spawn_rate = 1.0
+min_enemy_spawn_rate = 0.2
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
 _data = {
@@ -30,6 +61,7 @@ point_count = 4
 
 [node name="Battle" type="Node"]
 script = ExtResource("1_1wjgi")
+wave_data = Array[ExtResource("2_t5qii")]([SubResource("Resource_mlwgt"), SubResource("Resource_fb0ye"), SubResource("Resource_2olxs")])
 mob_scene = ExtResource("2_tlkdk")
 
 [node name="MobTimer" type="Timer" parent="."]
