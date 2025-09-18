@@ -11,7 +11,6 @@ var enemies_to_spawn := 0
 var killed_this_wave := 0
 
 @export_group("Player")
-@export var player_speed: float = 500
 var score: int
 
 @export_group("Path")
@@ -30,7 +29,7 @@ func init(player: Player) -> void:
 	wave = 0
 
 	player.show()
-	player.start(player_speed, $StartPos.position)
+	player.start($StartPos.position)
 	player.death.connect(game_over)
 
 	spawn_wave(wave)

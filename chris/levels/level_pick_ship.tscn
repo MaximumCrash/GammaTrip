@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://co44rqy6uvw3g"]
+
+[ext_resource type="Script" uid="uid://cyet1dudid3d8" path="res://chris/levels/level_pick_ship.gd" id="1_04aje"]
+[ext_resource type="Script" uid="uid://cwxxlb11katxv" path="res://chris/ships/ship_config.gd" id="2_78gbj"]
+[ext_resource type="Resource" uid="uid://bhi8r5x4p3fx6" path="res://chris/ships/Gunner.tres" id="3_susx1"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_mu8bv"]
+
+[node name="Level_Add_Weapon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_04aje")
+ships = Array[ExtResource("2_78gbj")]([ExtResource("3_susx1")])
+
+[node name="Ship" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Ship"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 328.0
+offset_right = 707.0
+offset_bottom = 351.0
+text = "Choose your starting ship:"
+
+[node name="Description" type="Label" parent="Ship"]
+layout_mode = 0
+offset_left = 744.0
+offset_top = 328.0
+offset_right = 895.0
+offset_bottom = 351.0
+
+[node name="Picker" type="BoxContainer" parent="Ship"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 388.0
+offset_top = 340.0
+offset_right = 635.02
+offset_bottom = 511.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="CheckBox" type="CheckBox" parent="Ship/Picker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Ship1"
+
+[node name="CheckBox2" type="CheckBox" parent="Ship/Picker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Ship2"
+
+[node name="CheckBox3" type="CheckBox" parent="Ship/Picker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Ship3"
+
+[node name="CheckBox4" type="CheckBox" parent="Ship/Picker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Ship4"
+
+[node name="CheckBox5" type="CheckBox" parent="Ship/Picker"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_mu8bv")
+text = "Ship5"
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 688.0
+offset_right = 487.0
+offset_bottom = 719.0
+text = "Confirm"

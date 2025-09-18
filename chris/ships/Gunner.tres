@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShipConfig" load_steps=4 format=3 uid="uid://bhi8r5x4p3fx6"]
+
+[ext_resource type="Script" uid="uid://cwxxlb11katxv" path="res://chris/ships/ship_config.gd" id="1_b3rwr"]
+[ext_resource type="PackedScene" uid="uid://cddewn5ij6onj" path="res://chris/weapons/weapon_machinegun.tscn" id="1_s1tkl"]
+[ext_resource type="PackedScene" uid="uid://dcqpa60sl8w2d" path="res://chris/weapons/weapon_beam.tscn" id="3_h3x2y"]
+
+[resource]
+script = ExtResource("1_b3rwr")
+primary_weapon = ExtResource("1_s1tkl")
+special_weapon = ExtResource("3_h3x2y")
+base_charge = 10.0
+move_speed = Vector2(400, 400)
+display_name = "Gunner"
+display_description = "Primary: MACHINE GUN
+Secondary: NONE
+Special: BEAM
+Movement: Average"
+metadata/_custom_type_script = "uid://cwxxlb11katxv"

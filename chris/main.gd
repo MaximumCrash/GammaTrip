@@ -1,10 +1,11 @@
 extends Node2D
 
-enum State {START_MENU, PICK_WEAPON, BATTLE}
+enum State {START_MENU, PICK_SHIP, PICK_WEAPON, BATTLE}
 var state := State.START_MENU
 
+@export var scene_pick_ship  : PackedScene
+@export var scene_pick_weapon : PackedScene
 @export var scene_battle     : PackedScene
-@export var scene_add_weapon : PackedScene
 
 @export var start_button : Button
 @export var player : Player
@@ -26,7 +27,7 @@ func new_game() -> void:
 	$HUD.show_message("Trip", wait)
 	await get_tree().create_timer(wait).timeout
 
-	load_add_weapon()
+	load_pick_ship()
 
 # battle signals
 func on_player_score(score: int, wave: int) -> void:
@@ -38,15 +39,14 @@ func on_player_death() -> void:
 	load_scene(State.START_MENU)
 
 func on_battle_win() -> void:
-	load_add_weapon()
-
-# add_weapon signals
-func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
-	player.equip_weapon(weapon_scene, slot)
-	load_battle()
+	load_pick_weapon()
 
 
-func load_add_weapon() -> void:
+func load_pick_ship() -> void:
+	var scene := load_scene(State.PICK_SHIP)
+	scene.confirm_ship.connect(on_ship_chosen)
+
+func load_pick_weapon() -> void:
 	var weapon_scene := load_scene(State.PICK_WEAPON)
 	weapon_scene.confirm_weapon_and_slot.connect(on_weapon_chosen)
 
@@ -57,6 +57,34 @@ func load_battle() -> void:
 	battle_scene.player_score.connect(on_player_score)
 	battle_scene.player_death.connect(on_player_death)
 	battle_scene.battle_win.connect(on_battle_win)
+
+
+# scene signals
+func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
+	player.equip_weapon(weapon_scene, slot)
+	load_battle()
+
+func on_ship_chosen(ship_config: ShipConfig) -> void:
+	var slot := 0
+
+	if ship_config.primary_weapon != null:
+		player.equip_weapon(ship_config.primary_weapon, slot)
+		slot += 1
+
+	if ship_config.secondary_weapon != null:
+		player.equip_weapon(ship_config.secondary_weapon, slot)
+		slot += 1
+
+	if ship_config.special_weapon != null:
+		player.equip_weapon(ship_config.special_weapon, slot)
+		slot += 1
+
+
+	player.speed  = ship_config.move_speed
+	player.charge = ship_config.base_charge
+
+	load_battle()
+
 	
 
 func load_scene(new_state: State) -> Node:
@@ -68,8 +96,10 @@ func load_scene(new_state: State) -> Node:
 
 	var scene : Node
 	match state:
+		State.PICK_SHIP:
+			scene = scene_pick_ship.instantiate()
 		State.PICK_WEAPON:
-			scene = scene_add_weapon.instantiate()
+			scene = scene_pick_weapon.instantiate()
 		State.BATTLE:
 			scene = scene_battle.instantiate()
 
