@@ -15,6 +15,9 @@ func shoot(pos: Vector2, dir: float, bullet_speed: float, bullet_lifetime: float
 	global_position = pos
 
 func _physics_process(delta: float) -> void:
+	$CollisionShape2D.disabled = !is_shooting
+	visible = is_shooting
+
 	if !is_shooting:
 		return
 
@@ -25,18 +28,8 @@ func _physics_process(delta: float) -> void:
 	position -= transform.y * speed * delta
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if !is_shooting:
-		return
-
 	body.get_parent().damage(damage)
 	set_state(false)
 
 func set_state(do_shoot: bool) -> void:
 	is_shooting = do_shoot
-
-	if is_shooting:
-		show()
-	else:
-		hide()
-
-	$CollisionShape2D.set_deferred("disabled", !shoot)
