@@ -61,31 +61,12 @@ func load_battle() -> void:
 
 # scene signals
 func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
-	player.equip_weapon(weapon_scene, slot)
+	player.equip_weapon(weapon_scene, slot, false)
 	load_battle()
 
 func on_ship_chosen(ship_config: ShipConfig) -> void:
-	var slot := 0
-
-	if ship_config.primary_weapon != null:
-		player.equip_weapon(ship_config.primary_weapon, slot)
-		slot += 1
-
-	if ship_config.secondary_weapon != null:
-		player.equip_weapon(ship_config.secondary_weapon, slot)
-		slot += 1
-
-	if ship_config.special_weapon != null:
-		player.equip_weapon(ship_config.special_weapon, slot)
-		slot += 1
-
-
-	player.speed  = ship_config.move_speed
-	player.charge = ship_config.base_charge
-
+	player.equip_ship(ship_config)
 	load_battle()
-
-	
 
 func load_scene(new_state: State) -> Node:
 	state = new_state

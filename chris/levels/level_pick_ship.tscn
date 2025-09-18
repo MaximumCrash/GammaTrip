@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://co44rqy6uvw3g"]
+[gd_scene load_steps=6 format=3 uid="uid://co44rqy6uvw3g"]
 
 [ext_resource type="Script" uid="uid://cyet1dudid3d8" path="res://chris/levels/level_pick_ship.gd" id="1_04aje"]
 [ext_resource type="Script" uid="uid://cwxxlb11katxv" path="res://chris/ships/ship_config.gd" id="2_78gbj"]
 [ext_resource type="Resource" uid="uid://bhi8r5x4p3fx6" path="res://chris/ships/Gunner.tres" id="3_susx1"]
+[ext_resource type="Resource" uid="uid://dl1s1uybtvain" path="res://chris/ships/Fighter.tres" id="4_susx1"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_mu8bv"]
 
@@ -14,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_04aje")
-ships = Array[ExtResource("2_78gbj")]([ExtResource("3_susx1")])
+ships = Array[ExtResource("2_78gbj")]([ExtResource("3_susx1"), ExtResource("4_susx1")])
 
 [node name="Ship" type="Control" parent="."]
 anchors_preset = 0

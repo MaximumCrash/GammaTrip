@@ -14,5 +14,5 @@ display_name = "Gunner"
 display_description = "Primary: MACHINE GUN
 Secondary: NONE
 Special: BEAM
-Movement: Average"
+Movement: STANDARD"
 metadata/_custom_type_script = "uid://cwxxlb11katxv"
