@@ -84,7 +84,7 @@ func _draw() -> void:
 
 	var inner_size := lerpf(min_size, max_size, t)
 
-	draw_circle(offset, inner_size, Color.KHAKI, true, true)
+	draw_circle(offset, inner_size, Color.KHAKI, true, -1.0, true)
 	draw_circle(offset, max_size, Color.FOREST_GREEN, false, 2.0, true) # outer edge
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

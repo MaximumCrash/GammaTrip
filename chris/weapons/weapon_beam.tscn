@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcqpa60sl8w2d"]
+[gd_scene load_steps=8 format=3 uid="uid://dcqpa60sl8w2d"]
 
 [ext_resource type="Script" uid="uid://bwy28yvaryfbf" path="res://chris/weapons/weapon.gd" id="1_vg8ij"]
-[ext_resource type="PackedScene" uid="uid://d1dalktoxs2an" path="res://chris/weapons/bullet_beam.tscn" id="2_2o7p5"]
 [ext_resource type="Texture2D" uid="uid://dvdtdgbd04ix5" path="res://chris/art/charge_0.png" id="2_vyatf"]
 [ext_resource type="Texture2D" uid="uid://dn2twkfwbe74t" path="res://chris/art/charge_1.png" id="3_2o7p5"]
 [ext_resource type="Texture2D" uid="uid://kcndbgkhggee" path="res://chris/art/weapon_beam.png" id="3_uihcv"]
@@ -35,13 +34,8 @@ animations = [{
 
 [node name="BeamWeapon" type="Node2D"]
 script = ExtResource("1_vg8ij")
-bullet_scene = ExtResource("2_2o7p5")
 bullet_speed = 0.0
-fire_rate_ms = 0.05
-bullet_lifetime = 0.1
-num_bullets = 20
 kind = 1
-charge_time = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_uihcv")
@@ -51,5 +45,4 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_xgc34")
 animation = &"idle"
 
-[node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -822)
+[node name="RayCast2D" type="RayCast2D" parent="."]

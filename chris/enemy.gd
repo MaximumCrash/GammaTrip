@@ -13,9 +13,9 @@ var killed_by_player := true
 @export var move_speed := 400.0
 
 @export_group("Health")
-@export var hp := 1
+@export var hp := 1.0
 
-func init(health: int, speed: float) -> void:
+func init(health: float, speed: float) -> void:
 	hp = health
 	move_speed = speed
 
@@ -31,7 +31,7 @@ func path_completed() -> void:
 func _exit_tree() -> void:
 	explode.emit(self, global_position, killed_by_player)
 
-func damage(amount: int) -> void:
+func damage(amount: float) -> void:
 	hp -= amount
 
 	if hp <= 0:
