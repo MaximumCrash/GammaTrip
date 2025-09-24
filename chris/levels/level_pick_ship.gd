@@ -19,6 +19,8 @@ func _ready() -> void:
 
 	$ConfirmButton.pressed.connect(on_confirm)
 
+	buttons[0].grab_focus()
+
 func _process(delta: float) -> void:
 	for i in range(buttons.size()):
 		if buttons[i].button_pressed:

@@ -17,6 +17,8 @@ func _ready() -> void:
 	start_button.pressed.connect(new_game)
 	player.hide()
 
+	start_button.grab_focus() # select button for controller
+
 func new_game() -> void:
 	start_button.hide()
 

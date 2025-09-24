@@ -27,7 +27,10 @@ func _ready() -> void:
 	for i in range(s_buttons.size()):
 		slot_buttons.push_back(s_buttons[i])
 
+
 	$ConfirmButton.pressed.connect(on_confirm)
+
+	weapon_buttons[0].grab_focus()
 
 func on_confirm() -> void:
 	var weapon_idx  := -1
