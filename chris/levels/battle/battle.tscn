@@ -8,25 +8,25 @@
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
 _data = {
-"points": PackedVector2Array(0, -1.4641, 0, 0, 0, 0, 0, 0, 0, 0, 1280, 0)
+"points": PackedVector2Array(0, -1.4641, 0, 0, 320, 0, 0, 0, 0, 0, 960, 0)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_2olxs"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1280, 0, 0, 0, 0, 0, 1280, 960)
+"points": PackedVector2Array(0, 0, 0, 0, 1280, 160, 0, 0, 0, 0, 1280, 800)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_biuce"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 960, 0, 0, 0, 0, 1280, 960)
+"points": PackedVector2Array(0, 0, 0, 0, 320, 960, 0, 0, 0, 0, 960, 960)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_gqbpy"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 960)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 0, 800)
 }
 point_count = 2
 
@@ -48,24 +48,26 @@ position = Vector2(640, 540)
 curve = SubResource("Curve2D_5i7a3")
 
 [node name="Spawn" type="PathFollow2D" parent="PathOrigin - Top"]
+position = Vector2(320, 0)
 
 [node name="PathOrigin - Right" type="Path2D" parent="."]
 curve = SubResource("Curve2D_2olxs")
 
 [node name="Spawn" type="PathFollow2D" parent="PathOrigin - Right"]
-position = Vector2(1280, 0)
+position = Vector2(1280, 160)
 rotation = 1.5708
 
 [node name="PathOrigin - Bottom" type="Path2D" parent="."]
 curve = SubResource("Curve2D_biuce")
 
 [node name="Spawn" type="PathFollow2D" parent="PathOrigin - Bottom"]
-position = Vector2(0, 960)
+position = Vector2(320, 960)
 
 [node name="PathOrigin - Left" type="Path2D" parent="."]
 curve = SubResource("Curve2D_gqbpy")
 
 [node name="Spawn" type="PathFollow2D" parent="PathOrigin - Left"]
+position = Vector2(0, 160)
 rotation = 1.5708
 
 [node name="EnemyExplode" parent="." instance=ExtResource("5_7hhe8")]
