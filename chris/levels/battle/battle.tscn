@@ -84,11 +84,15 @@ _data = {
 }
 point_count = 2
 
-[node name="Battle" type="Node" node_paths=PackedStringArray("path_origins")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("path_origins")]
 script = ExtResource("1_1wjgi")
 wave_data = Array[ExtResource("2_t5qii")]([SubResource("Resource_mlwgt"), SubResource("Resource_biuce"), SubResource("Resource_2olxs"), SubResource("Resource_gqbpy")])
 path_scenes = Array[PackedScene]([ExtResource("4_2olxs"), ExtResource("5_biuce"), ExtResource("6_gqbpy")])
 path_origins = [NodePath("PathOrigin - Top"), NodePath("PathOrigin - Right"), NodePath("PathOrigin - Bottom"), NodePath("PathOrigin - Left")]
+path_color_0 = Color(0, 1, 1, 0.470588)
+path_color_1 = Color(0, 1, 1, 0.196078)
+path_length_seconds = 1.0
+metadata/_custom_type_script = "uid://dsli2pppl5qni"
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -108,19 +112,15 @@ position = Vector2(1280, 0)
 rotation = 1.5708
 
 [node name="PathOrigin - Bottom" type="Path2D" parent="."]
-scale = Vector2(1, 1)
 curve = SubResource("Curve2D_biuce")
 
 [node name="Spawn" type="PathFollow2D" parent="PathOrigin - Bottom"]
 position = Vector2(0, 960)
 
 [node name="PathOrigin - Left" type="Path2D" parent="."]
-scale = Vector2(1, 1)
 curve = SubResource("Curve2D_gqbpy")
 
 [node name="Spawn" type="PathFollow2D" parent="PathOrigin - Left"]
 rotation = 1.5708
 
 [node name="EnemyExplode" parent="." instance=ExtResource("5_7hhe8")]
-
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

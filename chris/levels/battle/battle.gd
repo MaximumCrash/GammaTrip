@@ -1,5 +1,5 @@
 class_name Battle
-extends Node
+extends Node2D
 
 signal player_score
 signal player_death
@@ -24,6 +24,15 @@ var is_battle_over := false
 
 enum Path {LINE, QUADRATIC, CUBIC}
 enum PathOrigin {TOP, RIGHT, BOTTOM, LEFT}
+
+@export_group("Path Visualizer")
+@export var path_color_0 : Color
+@export var path_color_1 : Color
+@export var path_draw_phase_seconds := 1.0
+@export var path_length_seconds := 0.25
+
+var enemy_paths : Array[Path2D]
+var enemy_lifetimes : Array[float]
 
 func init(player: Player) -> void:
 	wave = 0
@@ -83,6 +92,8 @@ func spawn_wave(wave_idx: int) -> void:
 		path.add_child(mob)
 
 		enemies.push_back(mob)
+		enemy_paths.push_back(path)
+		enemy_lifetimes.push_back(0)
 
 		mob.explode.connect(_on_mob_explode)
 		spawn_count += 1
@@ -90,11 +101,40 @@ func spawn_wave(wave_idx: int) -> void:
 	player_score.emit(0, wave+1)
 
 func _process(delta: float) -> void:
-	for enemy in enemies:
-		enemy.progress += delta * enemy.move_speed
+	queue_redraw()
 
-		if enemy.progress_ratio >= 1.0:
-			enemy.path_completed()
+	for i in range(enemies.size()):
+		var enemy := enemies[i]
+
+		var lifetime := enemy_lifetimes[i]
+		if lifetime >= path_draw_phase_seconds:
+			enemy.show()
+			enemy.progress += delta * enemy.move_speed
+
+			if enemy.progress_ratio >= 1.0:
+				enemy.path_completed()
+		else:
+			enemy.hide()
+
+		enemy_lifetimes[i] += delta
+
+func _draw() -> void:
+	for i in range(enemy_paths.size()):
+		var path := enemy_paths[i]
+		var curve := path.get_curve()
+
+		var lifetime := enemy_lifetimes[i]
+		var t := lifetime/path_draw_phase_seconds
+
+		var p0 : Vector2 = curve.samplef(t-path_length_seconds)
+		var p1 : Vector2 = curve.samplef(t)
+
+		# apply path transform to the curve sample
+		p0 = path.global_transform * p0
+		p1 = path.global_transform * p1
+
+		var color : Color = lerp(path_color_0, path_color_1, t)
+		draw_line(p0, p1, color, 5.0)
 
 func game_over() -> void:
 	player_death.emit()
@@ -110,6 +150,9 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2, killed_by_player: bool) 
 		return
 
 	enemies.remove_at(idx)
+	enemy_paths.remove_at(idx)
+	enemy_lifetimes.remove_at(idx)
+
 	$EnemyExplode.global_position = global_pos
 	$EnemyExplode.restart()
 	killed_this_wave += 1
