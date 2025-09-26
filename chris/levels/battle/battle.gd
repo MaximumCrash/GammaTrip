@@ -49,17 +49,27 @@ func spawn_wave(wave_idx: int) -> void:
 	var path_idx := current_wave.path
 	var root := get_tree().get_root()
 
+	var screen: Vector2 = get_viewport().size
+
 	var path_rotation := 0.0
 	var path_origin := path_origins[current_wave.path_origin]
 	match current_wave.path_origin:
 		PathOrigin.TOP:
-			path_rotation = 0
+			path_rotation = 0.0
 		PathOrigin.RIGHT:
 			path_rotation = 90.0
+
+			#swap screen coords
+			screen.x = screen.y;
+			screen.y = get_viewport().size.x
 		PathOrigin.BOTTOM:
 			path_rotation = 180.0
 		PathOrigin.LEFT:
 			path_rotation = 270.0
+
+			#swap screen coords
+			screen.x = screen.y;
+			screen.y = get_viewport().size.x
 
 	var mob_spawn_location:Node = path_origin.get_node("Spawn")
 
@@ -75,17 +85,18 @@ func spawn_wave(wave_idx: int) -> void:
 		var spawn_pos:Vector2 = mob_spawn_location.global_position
 			
 		var path : Path2D = path_scenes[path_idx].instantiate()
+		path.rotation_degrees = path_rotation
+
 		var curve := Curve2D.new()
-		var screen_size: Vector2 = get_viewport().size
+
 		for point in path.curve.get_baked_points():
 			var norm_point := point.normalized()
 			var p := Vector2.ZERO
-			p.x = norm_point.x * screen_size.x
-			p.y = norm_point.y * screen_size.y
+			p.x = norm_point.x * screen.x
+			p.y = norm_point.y * screen.y
 			curve.add_point(p)
 
 		path.set_curve(curve)
-		path.rotation_degrees = path_rotation
 
 		path.global_position = spawn_pos
 		root.add_child(path)
