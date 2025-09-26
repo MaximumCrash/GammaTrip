@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="BattleData" load_steps=8 format=3 uid="uid://ds3kiqoygoktx"]
+
+[ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/levels/battle/battle_data.gd" id="1_ouktn"]
+[ext_resource type="Script" uid="uid://dld85dd8y8j3w" path="res://chris/levels/battle/wave_data.gd" id="2_8l5yd"]
+[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="3_8l5yd"]
+
+[sub_resource type="Resource" id="Resource_ouktn"]
+script = ExtResource("2_8l5yd")
+num_enemies = 5
+enemy_scene = ExtResource("3_8l5yd")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 1
+path_origin = 0
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_8l5yd"]
+script = ExtResource("2_8l5yd")
+num_enemies = 5
+enemy_scene = ExtResource("3_8l5yd")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 1
+path_origin = 2
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_su3mr"]
+script = ExtResource("2_8l5yd")
+num_enemies = 10
+enemy_scene = ExtResource("3_8l5yd")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 0
+path_origin = 0
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_xq5nv"]
+script = ExtResource("2_8l5yd")
+num_enemies = 5
+enemy_scene = ExtResource("3_8l5yd")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 0
+path_origin = 3
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[resource]
+script = ExtResource("1_ouktn")
+waves = Array[ExtResource("2_8l5yd")]([SubResource("Resource_ouktn"), SubResource("Resource_8l5yd"), SubResource("Resource_su3mr"), SubResource("Resource_xq5nv")])
+metadata/_custom_type_script = "uid://c1g5y6qstry3w"

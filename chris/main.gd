@@ -13,6 +13,10 @@ var state := State.START_MENU
 var active_scene : Node
 var total_score := 0
 
+@export_group("Battle")
+@export var battles : Array[BattleData]
+var battle_idx := 0
+
 func _ready() -> void:
 	start_button.pressed.connect(new_game)
 	player.hide()
@@ -54,7 +58,13 @@ func load_pick_weapon() -> void:
 
 func load_battle() -> void:
 	var battle_scene := load_scene(State.BATTLE)
-	battle_scene.init(player)
+
+	battle_scene.init(player, battles[battle_idx])
+
+	# just loop for now
+	battle_idx += 1
+	if battle_idx > battles.size():
+		battle_idx = 0
 
 	battle_scene.player_score.connect(on_player_score)
 	battle_scene.player_death.connect(on_player_death)

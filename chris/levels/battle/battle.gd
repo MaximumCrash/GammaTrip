@@ -6,7 +6,7 @@ signal player_death
 signal battle_win
 
 @export_group("Waves")
-@export var wave_data : Array[WaveData]
+@export var config : BattleData
 var enemies_to_spawn := 0
 var killed_this_wave := 0
 
@@ -34,17 +34,17 @@ enum PathOrigin {TOP, RIGHT, BOTTOM, LEFT}
 var enemy_paths : Array[Path2D]
 var enemy_lifetimes : Array[float]
 
-func init(player: Player) -> void:
+func init(player: Player, battle_config : BattleData) -> void:
 	wave = 0
-
 	player.show()
 	player.start($StartPos.position)
 	player.death.connect(game_over)
 
+	config = battle_config
 	spawn_wave(wave)
 
 func spawn_wave(wave_idx: int) -> void:
-	var current_wave := wave_data[wave_idx]
+	var current_wave := config.waves[wave_idx]
 
 	var path_idx := current_wave.path
 	var root := get_tree().get_root()
@@ -157,14 +157,14 @@ func _on_mob_explode(enemy: Enemy, global_pos: Vector2, killed_by_player: bool) 
 	$EnemyExplode.restart()
 	killed_this_wave += 1
 
-	var current_wave := wave_data[wave]
+	var current_wave := config.waves[wave]
 	var remaining_enemies := current_wave.num_enemies - killed_this_wave
 
 	if remaining_enemies <= 0:
 		killed_this_wave = 0
 		wave += 1
 
-		if wave >= wave_data.size():
+		if wave >= config.waves.size():
 			battle_win.emit()
 			is_battle_over = true
 			return

@@ -1,64 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cb3tyecuy2mog"]
+[gd_scene load_steps=10 format=3 uid="uid://cb3tyecuy2mog"]
 
 [ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/levels/battle/battle.gd" id="1_1wjgi"]
-[ext_resource type="Script" uid="uid://dld85dd8y8j3w" path="res://chris/levels/battle/wave_data.gd" id="2_t5qii"]
-[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_tlkdk"]
 [ext_resource type="PackedScene" uid="uid://b0khagp8q4q2m" path="res://chris/path/path_line.tscn" id="4_2olxs"]
 [ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_7hhe8"]
 [ext_resource type="PackedScene" uid="uid://sj0bytrv32ui" path="res://chris/path/path_quadratic.tscn" id="5_biuce"]
 [ext_resource type="PackedScene" uid="uid://cqar7qventh5j" path="res://chris/path/path_cubic.tscn" id="6_gqbpy"]
-
-[sub_resource type="Resource" id="Resource_mlwgt"]
-script = ExtResource("2_t5qii")
-num_enemies = 5
-enemy_scene = ExtResource("2_tlkdk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 0
-path_origin = 0
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
-metadata/_custom_type_script = "uid://dld85dd8y8j3w"
-
-[sub_resource type="Resource" id="Resource_biuce"]
-script = ExtResource("2_t5qii")
-num_enemies = 5
-enemy_scene = ExtResource("2_tlkdk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 0
-path_origin = 1
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
-metadata/_custom_type_script = "uid://dld85dd8y8j3w"
-
-[sub_resource type="Resource" id="Resource_2olxs"]
-script = ExtResource("2_t5qii")
-num_enemies = 5
-enemy_scene = ExtResource("2_tlkdk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 0
-path_origin = 2
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
-metadata/_custom_type_script = "uid://dld85dd8y8j3w"
-
-[sub_resource type="Resource" id="Resource_gqbpy"]
-script = ExtResource("2_t5qii")
-num_enemies = 5
-enemy_scene = ExtResource("2_tlkdk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 0
-path_origin = 3
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
-metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Curve2D" id="Curve2D_5i7a3"]
 _data = {
@@ -86,7 +32,6 @@ point_count = 2
 
 [node name="Battle" type="Node2D" node_paths=PackedStringArray("path_origins")]
 script = ExtResource("1_1wjgi")
-wave_data = Array[ExtResource("2_t5qii")]([SubResource("Resource_mlwgt"), SubResource("Resource_biuce"), SubResource("Resource_2olxs"), SubResource("Resource_gqbpy")])
 path_scenes = Array[PackedScene]([ExtResource("4_2olxs"), ExtResource("5_biuce"), ExtResource("6_gqbpy")])
 path_origins = [NodePath("PathOrigin - Top"), NodePath("PathOrigin - Right"), NodePath("PathOrigin - Bottom"), NodePath("PathOrigin - Left")]
 path_color_0 = Color(0, 1, 1, 0.470588)

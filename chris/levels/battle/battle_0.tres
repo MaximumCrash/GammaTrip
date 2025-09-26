@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="BattleData" load_steps=7 format=3 uid="uid://g7peqgsj3iey"]
+
+[ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/levels/battle/battle_data.gd" id="1_6tw4h"]
+[ext_resource type="Script" uid="uid://dld85dd8y8j3w" path="res://chris/levels/battle/wave_data.gd" id="2_6hj5r"]
+[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="3_6hj5r"]
+
+[sub_resource type="Resource" id="Resource_mlwgt"]
+script = ExtResource("2_6hj5r")
+num_enemies = 5
+enemy_scene = ExtResource("3_6hj5r")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 0
+path_origin = 0
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_biuce"]
+script = ExtResource("2_6hj5r")
+num_enemies = 5
+enemy_scene = ExtResource("3_6hj5r")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 0
+path_origin = 1
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_gqbpy"]
+script = ExtResource("2_6hj5r")
+num_enemies = 5
+enemy_scene = ExtResource("3_6hj5r")
+enemy_spawn_rate = 1.0
+min_enemy_hp = 1
+max_enemy_hp = 5
+path = 0
+path_origin = 3
+min_enemy_speed = 200.0
+max_enemy_speed = 400.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[resource]
+script = ExtResource("1_6tw4h")
+waves = Array[ExtResource("2_6hj5r")]([SubResource("Resource_mlwgt"), SubResource("Resource_biuce"), SubResource("Resource_gqbpy")])
+metadata/_custom_type_script = "uid://c1g5y6qstry3w"
