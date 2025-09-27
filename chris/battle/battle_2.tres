@@ -1,49 +1,69 @@
-[gd_resource type="Resource" script_class="BattleData" load_steps=7 format=3 uid="uid://chywantslfgtb"]
+[gd_resource type="Resource" script_class="BattleData" load_steps=9 format=3 uid="uid://chywantslfgtb"]
 
 [ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/battle/battle_data.gd" id="1_fb2rx"]
 [ext_resource type="Script" uid="uid://dld85dd8y8j3w" path="res://chris/battle/enemy_data.gd" id="2_0dvkh"]
-[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="3_hgyjk"]
 
-[sub_resource type="Resource" id="Resource_8b0bx"]
+[sub_resource type="Resource" id="Resource_1qs3s"]
 script = ExtResource("2_0dvkh")
-num_enemies = 5
-enemy_scene = ExtResource("3_hgyjk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 2
-path_origin = 0
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
+kind = 0
+spawn_time = 0.0
+health = 1
+origin = Vector2(100, 0)
+path = 0
+speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
-[sub_resource type="Resource" id="Resource_hgyjk"]
+[sub_resource type="Resource" id="Resource_6or3x"]
 script = ExtResource("2_0dvkh")
-num_enemies = 10
-enemy_scene = ExtResource("3_hgyjk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 1
-path_origin = 0
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
+kind = 0
+spawn_time = 0.0
+health = 1
+origin = Vector2(200, 0)
+path = 0
+speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
-[sub_resource type="Resource" id="Resource_yrrat"]
+[sub_resource type="Resource" id="Resource_s3rte"]
 script = ExtResource("2_0dvkh")
-num_enemies = 10
-enemy_scene = ExtResource("3_hgyjk")
-enemy_spawn_rate = 1.0
-min_enemy_hp = 1
-max_enemy_hp = 5
-path = 2
-path_origin = 3
-min_enemy_speed = 200.0
-max_enemy_speed = 400.0
+kind = 0
+spawn_time = 0.0
+health = 1
+origin = Vector2(300, 0)
+path = 0
+speed = 300.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_0uvj0"]
+script = ExtResource("2_0dvkh")
+kind = 0
+spawn_time = 0.0
+health = 1
+origin = Vector2(400, 0)
+path = 0
+speed = 300.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_qf8i1"]
+script = ExtResource("2_0dvkh")
+kind = 0
+spawn_time = 0.0
+health = 1
+origin = Vector2(400, 0)
+path = 0
+speed = 300.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_b461a"]
+script = ExtResource("2_0dvkh")
+kind = 0
+spawn_time = 0.0
+health = 1
+origin = Vector2(500, 0)
+path = 0
+speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [resource]
 script = ExtResource("1_fb2rx")
-waves = Array[ExtResource("2_0dvkh")]([SubResource("Resource_8b0bx"), SubResource("Resource_hgyjk"), SubResource("Resource_yrrat")])
+enemies = Array[ExtResource("2_0dvkh")]([SubResource("Resource_1qs3s"), SubResource("Resource_6or3x"), SubResource("Resource_s3rte"), SubResource("Resource_0uvj0"), SubResource("Resource_qf8i1"), SubResource("Resource_b461a")])
 metadata/_custom_type_script = "uid://c1g5y6qstry3w"

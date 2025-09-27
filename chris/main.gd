@@ -63,7 +63,7 @@ func load_battle() -> void:
 
 	# just loop for now
 	battle_idx += 1
-	if battle_idx > battles.size():
+	if battle_idx >= battles.size():
 		battle_idx = 0
 
 	battle_scene.player_score.connect(on_player_score)
