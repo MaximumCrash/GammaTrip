@@ -21,10 +21,8 @@ func show_game_over() -> void:
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 
-func update_score(score: int, wave: int) -> void:
+func update_score(score: int) -> void:
 	$ScoreLabel.text = str(score)
-	$WaveLabel.text = "Wave: " + str(wave)
-
 
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()

@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb3tyecuy2mog"]
+
+[ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/battle/battle.gd" id="1_1wjgi"]
+[ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy.tscn" id="2_plvl8"]
+[ext_resource type="PackedScene" uid="uid://kgqrc4asqhsf" path="res://chris/paths/path_line.tscn" id="3_fb0ye"]
+[ext_resource type="PackedScene" uid="uid://dfptysv4ea6gx" path="res://chris/paths/path_quadratic.tscn" id="4_2olxs"]
+[ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_7hhe8"]
+[ext_resource type="PackedScene" uid="uid://bvgyja04mj7hq" path="res://chris/paths/paths_cubic.tscn" id="5_biuce"]
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_1wjgi")
+enemy_types = Array[PackedScene]([ExtResource("2_plvl8")])
+path_types = Array[PackedScene]([ExtResource("3_fb0ye"), ExtResource("4_2olxs"), ExtResource("5_biuce")])
+path_color_0 = Color(0, 1, 1, 0.470588)
+path_color_1 = Color(0, 1, 1, 0.196078)
+path_length_seconds = 1.0
+metadata/_custom_type_script = "uid://dsli2pppl5qni"
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartPos" type="Marker2D" parent="."]
+position = Vector2(640, 540)
+
+[node name="EnemyExplode" parent="." instance=ExtResource("5_7hhe8")]

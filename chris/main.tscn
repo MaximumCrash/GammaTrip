@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://dgv07m0rfnmo6"]
 
 [ext_resource type="Script" uid="uid://cs42mix8i5u6p" path="res://chris/main.gd" id="1_rd8nt"]
-[ext_resource type="PackedScene" uid="uid://cb3tyecuy2mog" path="res://chris/levels/battle/battle.tscn" id="2_8f6ys"]
+[ext_resource type="PackedScene" uid="uid://cb3tyecuy2mog" path="res://chris/battle/battle.tscn" id="2_8f6ys"]
 [ext_resource type="PackedScene" uid="uid://co44rqy6uvw3g" path="res://chris/levels/level_pick_ship.tscn" id="2_mkd0d"]
 [ext_resource type="PackedScene" uid="uid://bs7t1cwlkmd5d" path="res://chris/levels/level_add_weapon.tscn" id="3_awu87"]
 [ext_resource type="PackedScene" uid="uid://drf8njxyveqp2" path="res://chris/hud.tscn" id="4_awu87"]
 [ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="5_fnt0s"]
-[ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/levels/battle/battle_data.gd" id="5_wil88"]
-[ext_resource type="Resource" uid="uid://g7peqgsj3iey" path="res://chris/levels/battle/battle_0.tres" id="6_s7f0y"]
-[ext_resource type="Resource" uid="uid://ds3kiqoygoktx" path="res://chris/levels/battle/battle_1.tres" id="7_k1pss"]
-[ext_resource type="Resource" uid="uid://chywantslfgtb" path="res://chris/levels/battle/battle_2.tres" id="8_3n3ys"]
+[ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/battle/battle_data.gd" id="5_wil88"]
+[ext_resource type="Resource" uid="uid://g7peqgsj3iey" path="res://chris/battle/battle_0.tres" id="6_s7f0y"]
+[ext_resource type="Resource" uid="uid://ds3kiqoygoktx" path="res://chris/battle/battle_1.tres" id="7_k1pss"]
+[ext_resource type="Resource" uid="uid://chywantslfgtb" path="res://chris/battle/battle_2.tres" id="8_3n3ys"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("start_button", "player")]
 script = ExtResource("1_rd8nt")

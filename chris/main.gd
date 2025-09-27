@@ -36,9 +36,9 @@ func new_game() -> void:
 	load_pick_ship()
 
 # battle signals
-func on_player_score(score: int, wave: int) -> void:
+func on_player_score(score: int) -> void:
 	total_score += score
-	$HUD.update_score(total_score, wave)
+	$HUD.update_score(total_score)
 
 func on_player_death() -> void:
 	$HUD.show_game_over()
