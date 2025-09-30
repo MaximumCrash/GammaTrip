@@ -101,8 +101,14 @@ func _draw() -> void:
 
 		var lifetime := enemy_lifetimes[i]
 		var t := lifetime/path_draw_phase_seconds
+		var look_back := path_length_seconds
 
-		var p0 : Vector2 = curve.samplef(t-path_length_seconds)
+		# flip path draw direction
+		if enemies[i].path_dir == PathDirection.BACKWARD:
+			t = 1.0 - (lifetime/path_draw_phase_seconds)
+			look_back = -path_length_seconds
+
+		var p0 : Vector2 = curve.samplef(t-look_back)
 		var p1 : Vector2 = curve.samplef(t)
 
 		# apply path transform to the curve sample

@@ -52,7 +52,7 @@ metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 [sub_resource type="Resource" id="Resource_a44g0"]
 script = ExtResource("1_lnf6t")
 spawn_time = 7.0
-origin = Vector2(0, 400)
+origin = Vector2(0, 450)
 path = 1
 path_dir = 1
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
@@ -67,7 +67,7 @@ metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 [sub_resource type="Resource" id="Resource_ua7oe"]
 script = ExtResource("1_lnf6t")
 spawn_time = 7.0
-origin = Vector2(0, 300)
+origin = Vector2(0, 350)
 path = 1
 path_dir = 1
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
