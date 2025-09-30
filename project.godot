@@ -31,7 +31,7 @@ DSP/dsp_buffer_count=4
 
 config/name="GammaTrip"
 run/main_scene="uid://dgv07m0rfnmo6"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [debug]
