@@ -5,61 +5,37 @@
 
 [sub_resource type="Resource" id="Resource_1qs3s"]
 script = ExtResource("2_0dvkh")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(100, 0)
-path = 0
 speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_6or3x"]
 script = ExtResource("2_0dvkh")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(200, 0)
-path = 0
 speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_s3rte"]
 script = ExtResource("2_0dvkh")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(300, 0)
-path = 0
 speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_0uvj0"]
 script = ExtResource("2_0dvkh")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(400, 0)
-path = 0
 speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_qf8i1"]
 script = ExtResource("2_0dvkh")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(400, 0)
-path = 0
 speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_b461a"]
 script = ExtResource("2_0dvkh")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(500, 0)
-path = 0
 speed = 300.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 

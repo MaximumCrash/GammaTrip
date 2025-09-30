@@ -1,69 +1,78 @@
-[gd_resource type="Resource" script_class="BattleData" load_steps=9 format=3 uid="uid://g7peqgsj3iey"]
+[gd_resource type="Resource" script_class="BattleData" load_steps=13 format=3 uid="uid://g7peqgsj3iey"]
 
 [ext_resource type="Script" uid="uid://dld85dd8y8j3w" path="res://chris/battle/enemy_data.gd" id="1_lnf6t"]
 [ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/battle/battle_data.gd" id="1_qwqob"]
 
 [sub_resource type="Resource" id="Resource_qwqob"]
 script = ExtResource("1_lnf6t")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(200, 0)
-path = 0
-speed = 100.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_ml4jl"]
 script = ExtResource("1_lnf6t")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(400, 0)
-path = 0
-speed = 100.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_mbw5b"]
 script = ExtResource("1_lnf6t")
-kind = 0
-spawn_time = 0.0
-health = 1
 origin = Vector2(600, 0)
-path = 0
-speed = 100.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_lnf6t"]
 script = ExtResource("1_lnf6t")
-kind = 0
 spawn_time = 5.0
-health = 1
 origin = Vector2(300, 0)
-path = 1
+path = 2
 speed = 200.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_31vnc"]
 script = ExtResource("1_lnf6t")
-kind = 0
 spawn_time = 5.0
-health = 1
 origin = Vector2(400, 0)
-path = 1
+path = 2
 speed = 200.0
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [sub_resource type="Resource" id="Resource_0bpky"]
 script = ExtResource("1_lnf6t")
-kind = 0
 spawn_time = 5.0
-health = 1
 origin = Vector2(500, 0)
-path = 1
+path = 2
 speed = 200.0
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_fqfaj"]
+script = ExtResource("1_lnf6t")
+spawn_time = 7.0
+origin = Vector2(0, 400)
+path = 1
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_a44g0"]
+script = ExtResource("1_lnf6t")
+spawn_time = 7.0
+origin = Vector2(0, 400)
+path = 1
+path_dir = 1
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_kos84"]
+script = ExtResource("1_lnf6t")
+spawn_time = 7.0
+origin = Vector2(0, 300)
+path = 1
+metadata/_custom_type_script = "uid://dld85dd8y8j3w"
+
+[sub_resource type="Resource" id="Resource_ua7oe"]
+script = ExtResource("1_lnf6t")
+spawn_time = 7.0
+origin = Vector2(0, 300)
+path = 1
+path_dir = 1
 metadata/_custom_type_script = "uid://dld85dd8y8j3w"
 
 [resource]
 script = ExtResource("1_qwqob")
-enemies = Array[ExtResource("1_lnf6t")]([SubResource("Resource_qwqob"), SubResource("Resource_ml4jl"), SubResource("Resource_mbw5b"), SubResource("Resource_lnf6t"), SubResource("Resource_31vnc"), SubResource("Resource_0bpky")])
+enemies = Array[ExtResource("1_lnf6t")]([SubResource("Resource_qwqob"), SubResource("Resource_ml4jl"), SubResource("Resource_mbw5b"), SubResource("Resource_lnf6t"), SubResource("Resource_31vnc"), SubResource("Resource_0bpky"), SubResource("Resource_fqfaj"), SubResource("Resource_a44g0"), SubResource("Resource_kos84"), SubResource("Resource_ua7oe")])
 metadata/_custom_type_script = "uid://c1g5y6qstry3w"

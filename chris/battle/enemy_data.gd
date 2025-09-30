@@ -6,4 +6,5 @@ extends Resource
 @export var health := 1
 @export var origin: Vector2
 @export var path: Battle.PathKind
+@export var path_dir := Battle.PathDirection.FORWARD
 @export var speed := 100.0

@@ -11,13 +11,30 @@ var killed_by_player := true
 @export var anim: AnimatedSprite2D
 
 @export var move_speed := 400.0
+var path_dir : Battle.PathDirection
 
 @export_group("Health")
 @export var hp := 1.0
 
-func init(health: float, speed: float) -> void:
+func init(health: float, speed: float, direction: Battle.PathDirection) -> void:
 	hp = health
 	move_speed = speed
+	path_dir = direction
+
+func get_path_multi() -> float:
+	if path_dir == Battle.PathDirection.FORWARD:
+		return 1.0
+	else:
+		return -1.0
+
+func process_move(delta: float) -> void:
+	self.progress += delta * move_speed * get_path_multi()
+
+func reached_path_end() -> bool:
+	if path_dir == Battle.PathDirection.FORWARD:
+		return self.progress_ratio >= 1
+	else:
+		return self.progress_ratio <= 0
 
 func _ready() -> void:
 	var mob_types: Array = Array(anim.sprite_frames.get_animation_names())

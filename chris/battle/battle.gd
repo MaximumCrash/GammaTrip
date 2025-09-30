@@ -18,8 +18,8 @@ var score: int
 
 @export_group("Path")
 @export var path_types : Array[PackedScene] # parallel to Path enum
-enum PathKind {LINE, QUADRATIC, CUBIC}
-
+enum PathKind {LINE_V, LINE_H, QUADRATIC, CUBIC}
+enum PathDirection {FORWARD, BACKWARD}
 
 @export_group("Path Visualizer")
 @export var path_color_0 : Color
@@ -53,7 +53,7 @@ func process_spawning(time: float) -> void:
 	var enemy_idx := data.kind
 	var mob: Enemy = enemy_types[enemy_idx].instantiate()
 
-	mob.init(data.health, data.speed)
+	mob.init(data.health, data.speed, data.path_dir)
 
 	var root := get_tree().get_root()
 	var path := path_types[path_idx].instantiate()
@@ -64,6 +64,9 @@ func process_spawning(time: float) -> void:
 	enemies.push_back(mob)
 	enemy_paths.push_back(path)
 	enemy_lifetimes.push_back(0)
+
+	if data.path_dir == PathDirection.BACKWARD:
+		mob.progress_ratio = 1
 
 	mob.explode.connect(_on_mob_explode)
 	last_enemy_spawn_idx += 1
@@ -79,9 +82,9 @@ func _process(delta: float) -> void:
 		var lifetime := enemy_lifetimes[i]
 		if lifetime >= path_draw_phase_seconds:
 			enemy.show()
-			enemy.progress += delta * enemy.move_speed
+			enemy.process_move(delta)
 
-			if enemy.progress_ratio >= 1.0:
+			if enemy.reached_path_end():
 				enemy.path_completed()
 		else:
 			enemy.hide()
