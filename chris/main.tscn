@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgv07m0rfnmo6"]
+[gd_scene load_steps=12 format=3 uid="uid://dgv07m0rfnmo6"]
 
 [ext_resource type="Script" uid="uid://cs42mix8i5u6p" path="res://chris/main.gd" id="1_rd8nt"]
 [ext_resource type="PackedScene" uid="uid://cb3tyecuy2mog" path="res://chris/battle/battle.tscn" id="2_8f6ys"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://g7peqgsj3iey" path="res://chris/battle/battle_0.tres" id="6_s7f0y"]
 [ext_resource type="Resource" uid="uid://ds3kiqoygoktx" path="res://chris/battle/battle_1.tres" id="7_k1pss"]
 [ext_resource type="Resource" uid="uid://chywantslfgtb" path="res://chris/battle/battle_2.tres" id="8_3n3ys"]
+[ext_resource type="AudioStream" uid="uid://cqjxosatr80yr" path="res://chris/sound/Maximum Crash - Heist Era 2025 - 05 Gamma Twin.mp3" id="11_s7f0y"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("start_button", "player")]
 script = ExtResource("1_rd8nt")
@@ -44,3 +45,7 @@ one_shot = true
 [node name="Player" parent="." instance=ExtResource("5_fnt0s")]
 
 [node name="ActiveSceneRoot" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_s7f0y")
+autoplay = true
