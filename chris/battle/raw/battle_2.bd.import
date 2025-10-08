@@ -1,0 +1,14 @@
+[remap]
+
+importer="battle.importer"
+type="BattleData"
+uid="uid://drs8h403yin0o"
+path="res://.godot/imported/battle_2.bd-738e539992bdecfe1507da76025ee73e.tres"
+
+[deps]
+
+source_file="res://chris/battle/raw/battle_2.bd"
+dest_files=["res://.godot/imported/battle_2.bd-738e539992bdecfe1507da76025ee73e.tres"]
+
+[params]
+

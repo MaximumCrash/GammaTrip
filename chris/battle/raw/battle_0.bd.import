@@ -1,0 +1,14 @@
+[remap]
+
+importer="battle.importer"
+type="BattleData"
+uid="uid://dtgpvpql55iv6"
+path="res://.godot/imported/battle_0.bd-8ed300f0ff4f1a9eae88fd3c196bbd73.tres"
+
+[deps]
+
+source_file="res://chris/battle/raw/battle_0.bd"
+dest_files=["res://.godot/imported/battle_0.bd-8ed300f0ff4f1a9eae88fd3c196bbd73.tres"]
+
+[params]
+

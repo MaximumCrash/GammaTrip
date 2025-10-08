@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://drf8njxyveqp2" path="res://chris/hud.tscn" id="4_awu87"]
 [ext_resource type="PackedScene" uid="uid://juqw07ibbuhk" path="res://chris/player.tscn" id="5_fnt0s"]
 [ext_resource type="Script" uid="uid://c1g5y6qstry3w" path="res://chris/battle/battle_data.gd" id="5_wil88"]
-[ext_resource type="Resource" uid="uid://g7peqgsj3iey" path="res://chris/battle/battle_0.tres" id="6_s7f0y"]
-[ext_resource type="Resource" uid="uid://ds3kiqoygoktx" path="res://chris/battle/battle_1.tres" id="7_k1pss"]
-[ext_resource type="Resource" uid="uid://chywantslfgtb" path="res://chris/battle/battle_2.tres" id="8_3n3ys"]
+[ext_resource type="Resource" uid="uid://dtgpvpql55iv6" path="res://chris/battle/raw/battle_0.bd" id="6_s7f0y"]
+[ext_resource type="Resource" uid="uid://ddh3tphrocnq8" path="res://chris/battle/raw/battle_1.bd" id="7_k1pss"]
+[ext_resource type="Resource" uid="uid://drs8h403yin0o" path="res://chris/battle/raw/battle_2.bd" id="8_3n3ys"]
 [ext_resource type="AudioStream" uid="uid://cqjxosatr80yr" path="res://chris/sound/Maximum Crash - Heist Era 2025 - 05 Gamma Twin.mp3" id="11_s7f0y"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("start_button", "player")]
