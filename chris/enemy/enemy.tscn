@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4wbevqrgtglx"]
 
-[ext_resource type="Script" uid="uid://c1a0tkk5xguah" path="res://chris/enemy.gd" id="1_nr3u1"]
+[ext_resource type="Script" uid="uid://bj4g8pkjvvtb7" path="res://chris/enemy/enemy.gd" id="1_nr3u1"]
 [ext_resource type="Texture2D" uid="uid://bk01k081l1hkv" path="res://chris/art/enemy.png" id="2_q8si4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dijsk"]
@@ -15,7 +15,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjqvt"]
-radius = 46.0
+radius = 45.99995
 height = 91.9999
 
 [node name="Enemy" type="PathFollow2D" node_paths=PackedStringArray("path_follow", "body", "anim")]

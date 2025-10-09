@@ -10,16 +10,23 @@ var killed_by_player := true
 @export var body: AnimatableBody2D
 @export var anim: AnimatedSprite2D
 
+@export var kind := Battle.EnemyKind.BASIC
+
 @export var move_speed := 400.0
 var path_dir : Battle.PathDirection
 
 @export_group("Health")
 @export var hp := 1.0
+var move_delay := 0.0
 
-func init(health: float, speed: float, direction: Battle.PathDirection) -> void:
+func init(health: float, speed: float, enemy_kind : Battle.EnemyKind, direction: Battle.PathDirection) -> void:
 	hp = health
 	move_speed = speed
+	kind = enemy_kind
 	path_dir = direction
+
+	if path_dir == Battle.PathDirection.BACKWARD:
+		self.progress_ratio = 1
 
 func get_path_multi() -> float:
 	if path_dir == Battle.PathDirection.FORWARD:
@@ -28,6 +35,10 @@ func get_path_multi() -> float:
 		return -1.0
 
 func process_move(delta: float) -> void:
+	if move_delay >= 0.0:
+		move_delay -= delta
+		return
+
 	self.progress += delta * move_speed * get_path_multi()
 
 func reached_path_end() -> bool:

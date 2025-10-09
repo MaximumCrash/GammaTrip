@@ -11,7 +11,7 @@ var last_enemy_spawn_idx := 0
 
 @export_group("Enemy")
 @export var enemy_types : Array[PackedScene] # runs parallel to Enemy enum
-enum EnemyKind {BASIC}
+enum EnemyKind {BASIC, LEADER}
 
 @export_group("Player")
 var score: int
@@ -46,32 +46,45 @@ func process_spawning(time: float) -> void:
 		return
 
 	var data := config.enemies[last_enemy_spawn_idx]
-	if battle_time < data.spawn_time: # TODO: sort array by spawn time to be sure
+	if time < data.spawn_time: # TODO: sort array by spawn time to be sure
 		return
 
-	var path_idx := data.path
-	var enemy_idx := data.kind
-	var mob: Enemy = enemy_types[enemy_idx].instantiate()
-
-	mob.init(data.health, data.speed, data.path_dir)
-
-	var root := get_tree().get_root()
-	var path := path_types[path_idx].instantiate()
-	path.global_position = data.origin
-	root.add_child(path)
-	path.add_child(mob)
-
-	enemies.push_back(mob)
-	enemy_paths.push_back(path)
-	enemy_lifetimes.push_back(0)
-
-	if data.path_dir == PathDirection.BACKWARD:
-		mob.progress_ratio = 1
-
-	mob.explode.connect(_on_mob_explode)
+	var enemy := spawn_enemy(data)
 	last_enemy_spawn_idx += 1
 
+	# leader spawns basic followers
+	if enemy.kind == EnemyKind.LEADER:
+		for i in range(0, 9):
+			# keep leader's params
+			var e := spawn(EnemyKind.BASIC, data.path, data.path_dir, data.health, data.origin, data.speed)
+
+			# but spawn with a delay
+			var delay_per := 0.2
+			var delay := delay_per * (i+1)
+			e.move_delay = delay
+
 	player_score.emit(0)
+
+func spawn_enemy(data: EnemyData) -> Enemy:
+	return spawn(data.kind, data.path, data.path_dir, data.health, data.origin, data.speed)
+
+func spawn(enemy: EnemyKind, path: PathKind, path_dir: PathDirection, health: int, origin: Vector2, speed: float) -> Enemy:
+	var enemy_inst: Enemy = enemy_types[enemy].instantiate()
+
+	var root := get_tree().get_root()
+	var path_inst := path_types[path].instantiate()
+	path_inst.global_position = origin
+	root.add_child(path_inst)
+	path_inst.add_child(enemy_inst)
+
+	enemies.push_back(enemy_inst)
+	enemy_paths.push_back(path_inst)
+	enemy_lifetimes.push_back(0)
+
+	enemy_inst.init(health, speed, enemy, path_dir)
+	enemy_inst.explode.connect(_on_enemy_explode)
+
+	return enemy_inst
 
 func _process(delta: float) -> void:
 	process_spawning(battle_time)
@@ -122,7 +135,7 @@ func game_over() -> void:
 	player_death.emit()
 	is_battle_over = true
 
-func _on_mob_explode(enemy: Enemy, global_pos: Vector2, killed_by_player: bool) -> void:
+func _on_enemy_explode(enemy: Enemy, global_pos: Vector2, killed_by_player: bool) -> void:
 	if is_battle_over:
 		return
 

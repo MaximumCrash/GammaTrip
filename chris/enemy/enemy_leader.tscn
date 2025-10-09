@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://k1oukwgi211g"]
+
+[ext_resource type="Script" uid="uid://bj4g8pkjvvtb7" path="res://chris/enemy/enemy.gd" id="1_t360s"]
+[ext_resource type="Texture2D" uid="uid://dotvst8owd2cw" path="res://chris/art/enemy_leader.png" id="2_t360s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vj382"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t360s")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oq4ae"]
+radius = 45.99995
+height = 91.9999
+
+[node name="Enemy_Leader" type="PathFollow2D" node_paths=PackedStringArray("path_follow", "body", "anim")]
+loop = false
+script = ExtResource("1_t360s")
+path_follow = NodePath(".")
+body = NodePath("AnimatableBody2D")
+anim = NodePath("AnimatableBody2D/AnimatedSprite2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(5, 0)
+collision_mask = 0
+sync_to_physics = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+position = Vector2(3, 1)
+scale = Vector2(1.8, 1.8)
+sprite_frames = SubResource("SpriteFrames_vj382")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(8, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oq4ae")
