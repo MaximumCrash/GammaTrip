@@ -6,7 +6,7 @@ signal death
 @export var charge := 0.0
 var charge_max := 10.0
 var charge_fill_rate := 2.0
-var charge_spend_rate := 2.5 # TODO: charge cost can vary with weapon
+var charge_spend_rate := 4.0 # TODO: charge cost can vary with weapon
 
 var screen_size: Vector2
 

@@ -36,6 +36,7 @@ animations = [{
 script = ExtResource("1_vg8ij")
 bullet_speed = 0.0
 kind = 1
+charge_time = 0.3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_uihcv")

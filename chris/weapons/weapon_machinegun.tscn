@@ -10,7 +10,6 @@ bullet_scene = ExtResource("2_kqbgb")
 bullet_speed = 800.0
 fire_rate_ms = 100.0
 bullet_lifetime = 1.0
-num_bullets = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_jxa1o")
