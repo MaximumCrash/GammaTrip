@@ -4,9 +4,17 @@ extends Area2D
 signal death
 @export var speed := Vector2(400.0, 200.0)
 @export var charge := 0.0
+var health := 3
+var max_health := 3
 var charge_max := 10.0
 var charge_fill_rate := 2.0
 var charge_spend_rate := 4.0 # TODO: charge cost can vary with weapon
+
+@export_group("Upgrade")
+var upgr_move_speed := Vector2(0.0, 0.0)
+var upgr_charge_fill_rate := 0.0
+var upgr_charge_spend_rate := 0.0
+var upgr_max_health := 0
 
 var screen_size: Vector2
 
@@ -39,7 +47,7 @@ func _process(delta: float) -> void:
 
 	if velocity.length() > 0:
 		$AnimatedSprite2D.animation = "move"
-		velocity = velocity.normalized() * speed
+		velocity = velocity.normalized() * (speed+upgr_move_speed)
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
@@ -67,16 +75,17 @@ func _process(delta: float) -> void:
 		if charge > 0:
 			fired_special = true
 			for weapon in special_weapons:
-				charge -= charge_spend_rate * delta
+				charge -= (charge_spend_rate+upgr_charge_spend_rate) * delta
 				weapon.attack()
 
 	if !fired_special:
-		charge += charge_fill_rate * delta
+		charge += (charge_fill_rate+upgr_charge_fill_rate) * delta
 		charge = min(charge, charge_max)
 
 	queue_redraw()
 
 func _draw() -> void:
+	# charge
 	const min_size := 0.0
 	const max_size := 25.0
 	const offset := Vector2(75, -75)
@@ -87,10 +96,28 @@ func _draw() -> void:
 	draw_circle(offset, inner_size, Color.KHAKI, true, -1.0, true)
 	draw_circle(offset, max_size, Color.FOREST_GREEN, false, 2.0, true) # outer edge
 
+	# hp - centered, just below the ship
+	const hp_origin := Vector2(25, 75)
+	const hp_size := 10.0
+	const hp_offset := Vector2((hp_size+2)*2, 0)
+
+	var total_size := Vector2((hp_size*max_health), 0) + (hp_offset*max_health)
+	var half_size := total_size/2.0
+
+	for i in range(max_health):
+		var pos := (hp_origin + (i * hp_offset)) - half_size
+		draw_circle(pos, hp_size, Color.WHITE, false, 2.0, true) # outer edge
+
+		if health > i:
+			draw_circle(pos, hp_size, Color.RED, true, -1.0, true)
+
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	hide()
-	death.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+	health -= 1
+
+	if health <= 0:
+		hide()
+		death.emit()
+		$CollisionShape2D.set_deferred("disabled", true)
 
 
 func equip_ship(ship_config: ShipConfig) -> void:
