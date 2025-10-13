@@ -11,15 +11,27 @@ var last_enemy_spawn_idx := 0
 
 @export_group("Enemy")
 @export var enemy_types : Array[PackedScene] # runs parallel to Enemy enum
-enum EnemyKind {BASIC, LEADER}
+enum EnemyKind {
+	BASIC = 0, 
+	SNAKE = 1,
+}
 
 @export_group("Player")
 var score: int
 
 @export_group("Path")
 @export var path_types : Array[PackedScene] # parallel to Path enum
-enum PathKind {LINE_V, LINE_H, QUADRATIC, CUBIC}
-enum PathDirection {FORWARD, BACKWARD}
+enum PathKind {
+	LINE_V = 0,
+	LINE_H = 1,
+	QUADRATIC = 2,
+	CUBIC = 3,
+}
+
+enum PathDirection {
+	FORWARD = 0,
+	BACKWARD = 1,
+}
 
 @export_group("Path Visualizer")
 @export var path_color_0 : Color
@@ -52,10 +64,10 @@ func process_spawning(time: float) -> void:
 	var enemy := spawn_enemy(data)
 	last_enemy_spawn_idx += 1
 
-	# leader spawns basic followers
-	if enemy.kind == EnemyKind.LEADER:
+	# snake spawns basic followers
+	if enemy.kind == EnemyKind.SNAKE:
 		for i in range(0, 9):
-			# keep leader's params
+			# keep snake's params
 			var e := spawn(EnemyKind.BASIC, data.path, data.path_dir, data.health, data.origin, data.speed)
 
 			# but spawn with a delay

@@ -1,6 +1,12 @@
 extends Node2D
 
-enum State {START_MENU, PICK_SHIP, PICK_WEAPON, BATTLE}
+enum State {
+	START_MENU = 0,
+	PICK_SHIP = 1,
+	PICK_WEAPON = 2,
+	BATTLE = 3,
+}
+
 var state := State.START_MENU
 
 @export var scene_pick_ship  : PackedScene

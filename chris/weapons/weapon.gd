@@ -13,7 +13,11 @@ var last_fire_time := 0.0
 var bullets: Array[Bullet] 
 var bullet_index: int
 
-enum Kind {MACHINE_GUN, BEAM, SWORD}
+enum Kind {
+	MACHINE_GUN = 0,
+	BEAM = 1,
+	SWORD = 2,
+}
 @export var kind: Kind
 
 @export var charge_time := 0.5
