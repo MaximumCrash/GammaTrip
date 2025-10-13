@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy/enemy.tscn" id="2_plvl8"]
 [ext_resource type="PackedScene" uid="uid://k1oukwgi211g" path="res://chris/enemy/enemy_leader.tscn" id="3_7prjh"]
 [ext_resource type="PackedScene" uid="uid://kgqrc4asqhsf" path="res://chris/paths/line_V.tscn" id="3_fb0ye"]
-[ext_resource type="PackedScene" uid="uid://dfptysv4ea6gx" path="res://chris/paths/quadtratic.tscn" id="4_2olxs"]
+[ext_resource type="PackedScene" uid="uid://dfptysv4ea6gx" path="res://chris/paths/quadratic.tscn" id="4_2olxs"]
 [ext_resource type="PackedScene" uid="uid://81ur6tk43s0j" path="res://chris/paths/line_H.tscn" id="4_nfxja"]
 [ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_7hhe8"]
 [ext_resource type="PackedScene" uid="uid://bvgyja04mj7hq" path="res://chris/paths/cubic.tscn" id="5_biuce"]
