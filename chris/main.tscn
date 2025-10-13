@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dgv07m0rfnmo6"]
 
 [ext_resource type="Script" uid="uid://cs42mix8i5u6p" path="res://chris/main.gd" id="1_rd8nt"]
-[ext_resource type="PackedScene" uid="uid://cb3tyecuy2mog" path="res://chris/battle/battle.tscn" id="2_8f6ys"]
+[ext_resource type="PackedScene" uid="uid://cb3tyecuy2mog" path="res://chris/battle.tscn" id="2_8f6ys"]
 [ext_resource type="PackedScene" uid="uid://co44rqy6uvw3g" path="res://chris/levels/level_pick_ship.tscn" id="2_mkd0d"]
 [ext_resource type="PackedScene" uid="uid://bs7t1cwlkmd5d" path="res://chris/levels/level_add_weapon.tscn" id="3_awu87"]
 [ext_resource type="PackedScene" uid="uid://drf8njxyveqp2" path="res://chris/hud.tscn" id="4_awu87"]

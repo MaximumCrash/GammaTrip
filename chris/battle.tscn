@@ -1,18 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://cb3tyecuy2mog"]
+[gd_scene load_steps=10 format=3 uid="uid://cb3tyecuy2mog"]
 
 [ext_resource type="Script" uid="uid://dsli2pppl5qni" path="res://chris/battle/battle.gd" id="1_1wjgi"]
 [ext_resource type="PackedScene" uid="uid://c4wbevqrgtglx" path="res://chris/enemy/enemy.tscn" id="2_plvl8"]
 [ext_resource type="PackedScene" uid="uid://k1oukwgi211g" path="res://chris/enemy/enemy_leader.tscn" id="3_7prjh"]
 [ext_resource type="PackedScene" uid="uid://kgqrc4asqhsf" path="res://chris/paths/line_V.tscn" id="3_fb0ye"]
-[ext_resource type="PackedScene" uid="uid://dfptysv4ea6gx" path="res://chris/paths/quadratic.tscn" id="4_2olxs"]
+[ext_resource type="PackedScene" uid="uid://dfptysv4ea6gx" path="res://chris/paths/quadratic_V.tscn" id="4_2olxs"]
 [ext_resource type="PackedScene" uid="uid://81ur6tk43s0j" path="res://chris/paths/line_H.tscn" id="4_nfxja"]
 [ext_resource type="PackedScene" uid="uid://ws1bmwghc4vy" path="res://chris/explode_particle.tscn" id="5_7hhe8"]
 [ext_resource type="PackedScene" uid="uid://bvgyja04mj7hq" path="res://chris/paths/cubic.tscn" id="5_biuce"]
+[ext_resource type="PackedScene" uid="uid://bvj5iebuj8kj7" path="res://chris/paths/quadratic_H.tscn" id="7_7hhe8"]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_1wjgi")
 enemy_types = Array[PackedScene]([ExtResource("2_plvl8"), ExtResource("3_7prjh")])
-path_types = Array[PackedScene]([ExtResource("3_fb0ye"), ExtResource("4_nfxja"), ExtResource("4_2olxs"), ExtResource("5_biuce")])
+path_types = Array[PackedScene]([ExtResource("3_fb0ye"), ExtResource("4_nfxja"), ExtResource("4_2olxs"), ExtResource("7_7hhe8"), ExtResource("5_biuce")])
 path_color_0 = Color(0, 1, 1, 0.470588)
 path_color_1 = Color(0, 1, 1, 0.196078)
 path_length_seconds = 1.0

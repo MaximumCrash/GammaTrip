@@ -24,8 +24,9 @@ var score: int
 enum PathKind {
 	LINE_V = 0,
 	LINE_H = 1,
-	QUADRATIC = 2,
-	CUBIC = 3,
+	QUADRATIC_V = 2,
+	QUADRATIC_H = 3,
+	CUBIC = 4,
 }
 
 enum PathDirection {
