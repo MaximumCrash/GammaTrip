@@ -5,13 +5,15 @@ enum State {
 	PICK_SHIP = 1,
 	PICK_WEAPON = 2,
 	BATTLE = 3,
+	SHOP = 4,
 }
 
 var state := State.START_MENU
 
-@export var scene_pick_ship  : PackedScene
+@export var scene_pick_ship : PackedScene
 @export var scene_pick_weapon : PackedScene
-@export var scene_battle     : PackedScene
+@export var scene_battle : PackedScene
+@export var scene_shop : PackedScene
 
 @export var start_button : Button
 @export var player : Player
@@ -22,6 +24,12 @@ var total_score := 0
 @export_group("Battle")
 @export var battles : Array[BattleData]
 var battle_idx := 0
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_ESCAPE:
+			if state == State.BATTLE:
+				on_battle_win()
 
 func _ready() -> void:
 	start_button.pressed.connect(new_game)
@@ -51,8 +59,7 @@ func on_player_death() -> void:
 	load_scene(State.START_MENU)
 
 func on_battle_win() -> void:
-	load_pick_weapon()
-
+	load_shop()
 
 func load_pick_ship() -> void:
 	var scene := load_scene(State.PICK_SHIP)
@@ -76,6 +83,11 @@ func load_battle() -> void:
 	battle_scene.player_death.connect(on_player_death)
 	battle_scene.battle_win.connect(on_battle_win)
 
+func load_shop() -> void:
+	var shop_scene := load_scene(State.SHOP)
+	shop_scene.confirm_purchase.connect(on_shop_purchase)
+	shop_scene.exit_shop.connect(on_shop_exit)
+
 
 # scene signals
 func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
@@ -84,6 +96,19 @@ func on_weapon_chosen(weapon_scene: PackedScene, slot: int) -> void:
 
 func on_ship_chosen(ship_config: ShipConfig) -> void:
 	player.equip_ship(ship_config)
+	load_battle()
+
+func on_shop_purchase(upgrade: UpgradeData) -> void:
+	if upgrade.cost <= total_score:
+		total_score -= upgrade.cost
+		$HUD.update_score(total_score)
+
+		player.upgr_move_speed        += upgrade.move_speed
+		player.upgr_charge_fill_rate  += upgrade.charge_fill_rate
+		player.upgr_charge_spend_rate += upgrade.charge_spend_rate
+		player.upgr_max_health        += upgrade.max_health
+
+func on_shop_exit() -> void:
 	load_battle()
 
 func load_scene(new_state: State) -> Node:
@@ -101,6 +126,8 @@ func load_scene(new_state: State) -> Node:
 			scene = scene_pick_weapon.instantiate()
 		State.BATTLE:
 			scene = scene_battle.instantiate()
+		State.SHOP:
+			scene = scene_shop.instantiate()
 
 	$ActiveSceneRoot.add_child(scene)
 	active_scene = scene

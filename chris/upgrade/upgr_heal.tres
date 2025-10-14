@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=2 format=3 uid="uid://w2ayrfuo0xsn"]
+
+[ext_resource type="Script" uid="uid://b4d2tp64kq8bi" path="res://chris/upgrade/upgrade_data.gd" id="1_ra02h"]
+
+[resource]
+script = ExtResource("1_ra02h")
+cost = 10
+display_name = "Heal 3"
+display_description = "Heal 3 HP"
+heal = 3
+metadata/_custom_type_script = "uid://b4d2tp64kq8bi"

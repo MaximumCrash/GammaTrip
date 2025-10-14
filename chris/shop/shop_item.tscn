@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://xg0mwq8mprtx"]
+
+[ext_resource type="Script" uid="uid://b6wcelfok002c" path="res://chris/shop/shop_item.gd" id="1_kb4m3"]
+
+[node name="ShopItem" type="Button"]
+custom_minimum_size = Vector2(256, 192)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+script = ExtResource("1_kb4m3")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Name"
+
+[node name="CostLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "$0"
+
+[node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -127.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Description Description Description Description Description Description Description Description Description Description "
+autowrap_mode = 2

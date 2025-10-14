@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" load_steps=2 format=3 uid="uid://cx84w3jr8mlh2"]
+
+[ext_resource type="Script" uid="uid://b4d2tp64kq8bi" path="res://chris/upgrade/upgrade_data.gd" id="1_k3xrw"]
+
+[resource]
+script = ExtResource("1_k3xrw")
+cost = 20
+display_name = "Charge Speed"
+display_description = "+1.0 per second
+Charge fills up faster"
+charge_fill_rate = 1.0
+metadata/_custom_type_script = "uid://b4d2tp64kq8bi"

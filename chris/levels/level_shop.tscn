@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5sn1o1fyay12"]
+
+[ext_resource type="Script" uid="uid://dd628h5nsmfjp" path="res://chris/levels/level_shop.gd" id="1_r7o4u"]
+[ext_resource type="Script" uid="uid://b4d2tp64kq8bi" path="res://chris/upgrade/upgrade_data.gd" id="2_fqr6r"]
+[ext_resource type="PackedScene" uid="uid://xg0mwq8mprtx" path="res://chris/shop/shop_item.tscn" id="2_tnu8u"]
+[ext_resource type="Resource" uid="uid://w2ayrfuo0xsn" path="res://chris/upgrade/upgr_heal.tres" id="3_ujl4i"]
+[ext_resource type="Resource" uid="uid://1c8i7g6gbhk1" path="res://chris/upgrade/upgr_move.tres" id="4_yg0i6"]
+[ext_resource type="Resource" uid="uid://cx84w3jr8mlh2" path="res://chris/upgrade/upgr_charge_fill.tres" id="5_yg0i6"]
+[ext_resource type="Resource" uid="uid://cx15kpbdl5uhm" path="res://chris/upgrade/upgr_charge_spend.tres" id="6_4nbvd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7o4u"]
+font_size = 80
+
+[node name="Level_Shop" type="Control" node_paths=PackedStringArray("shop_items")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r7o4u")
+inventory = Array[ExtResource("2_fqr6r")]([ExtResource("3_ujl4i"), ExtResource("4_yg0i6"), ExtResource("5_yg0i6"), ExtResource("6_4nbvd")])
+shop_items = [NodePath("Control/ItemContainer/Shop_Item"), NodePath("Control/ItemContainer/Shop_Item2"), NodePath("Control/ItemContainer/Shop_Item3")]
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 412.0
+offset_bottom = 144.0
+grow_horizontal = 2
+text = "Shop"
+label_settings = SubResource("LabelSettings_r7o4u")
+horizontal_alignment = 1
+
+[node name="ItemContainer" type="GridContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 205.0
+offset_top = 160.0
+offset_right = 1071.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 69
+columns = 4
+
+[node name="Shop_Item" parent="Control/ItemContainer" instance=ExtResource("2_tnu8u")]
+layout_mode = 2
+toggle_mode = false
+
+[node name="Shop_Item2" parent="Control/ItemContainer" instance=ExtResource("2_tnu8u")]
+layout_mode = 2
+toggle_mode = false
+
+[node name="Shop_Item3" parent="Control/ItemContainer" instance=ExtResource("2_tnu8u")]
+layout_mode = 2
+toggle_mode = false
+
+[node name="ExitButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 546.7097
+offset_top = 428.0
+offset_right = 693.2903
+offset_bottom = 492.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
