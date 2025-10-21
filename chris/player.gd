@@ -22,6 +22,9 @@ var screen_size: Vector2
 var weapons: Array[Weapon]
 var special_weapons : Array[Weapon]
 
+@export_group("VFX")
+@export var hit_flash: HitFlashVFX
+
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 
@@ -113,6 +116,8 @@ func _draw() -> void:
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	health -= 1
+
+	hit_flash.play()
 
 	if health <= 0:
 		hide()

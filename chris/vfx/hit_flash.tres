@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c30ck2embua6v"]
+
+[ext_resource type="Shader" uid="uid://bm1ewjceaca3a" path="res://chris/vfx/hit_flash.gdshader" id="1_ix2gj"]
+
+[resource]
+shader = ExtResource("1_ix2gj")
+shader_parameter/active = false

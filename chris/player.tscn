@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://juqw07ibbuhk"]
+[gd_scene load_steps=9 format=3 uid="uid://juqw07ibbuhk"]
 
 [ext_resource type="Script" uid="uid://bpxwwad7rv8x4" path="res://chris/player.gd" id="1_wt2hm"]
 [ext_resource type="Texture2D" uid="uid://bsmhmx302nd56" path="res://chris/art/ship_idle.png" id="2_sv2wq"]
+[ext_resource type="Material" uid="uid://c30ck2embua6v" path="res://chris/vfx/hit_flash.tres" id="2_wt2hm"]
 [ext_resource type="Texture2D" uid="uid://ds66h3kbhxoaa" path="res://chris/art/ship_move_0.png" id="3_aamy7"]
 [ext_resource type="Texture2D" uid="uid://6lhdw6ap64v1" path="res://chris/art/ship_move_1.png" id="4_wcbek"]
+[ext_resource type="Script" uid="uid://bk4odi000i2gj" path="res://chris/vfx/hit_flash_vfx.gd" id="6_sv2wq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_el8e8"]
 animations = [{
@@ -26,12 +28,14 @@ animations = [{
 radius = 19.0
 height = 38.0
 
-[node name="Player" type="Area2D" node_paths=PackedStringArray("weapon_slots")]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("weapon_slots", "hit_flash")]
 script = ExtResource("1_wt2hm")
 weapon_slots = [NodePath("WeaponSlot0"), NodePath("WeaponSlot1"), NodePath("WeaponSlot2")]
+hit_flash = NodePath("HitFlash")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("2_wt2hm")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_el8e8")
 animation = &"move"
@@ -51,5 +55,9 @@ rotation = -0.261799
 [node name="WeaponSlot2" type="Marker2D" parent="."]
 position = Vector2(90, 0)
 rotation = 0.261799
+
+[node name="HitFlash" type="Node2D" parent="." node_paths=PackedStringArray("hit_flash")]
+script = ExtResource("6_sv2wq")
+hit_flash = NodePath("../AnimatedSprite2D")
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
