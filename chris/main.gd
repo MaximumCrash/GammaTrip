@@ -108,6 +108,9 @@ func on_shop_purchase(upgrade: UpgradeData) -> void:
 		player.upgr_charge_spend_rate += upgrade.charge_spend_rate
 		player.upgr_max_health        += upgrade.max_health
 
+		player.health += upgrade.heal
+		player.health = min(player.health, player.max_health)
+
 func on_shop_exit() -> void:
 	load_battle()
 
